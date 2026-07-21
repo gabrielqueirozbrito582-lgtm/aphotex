@@ -95,7 +95,7 @@ export default function ContatoPage() {
         scrollTrigger: { trigger: ".ct-form-wrap", start: "top 85%", toggleActions: "play none none none" },
       });
 
-      gsap.utils.toArray<Element>(".ct-info-item").forEach((el, i) => {
+      (gsap.utils.toArray(".ct-info-item") as Element[]).forEach((el, i) => {
         gsap.from(el, {
           x: 30, opacity: 0, duration: 0.55, delay: i * 0.1, ease: "power3.out",
           scrollTrigger: { trigger: ".ct-info", start: "top 82%", toggleActions: "play none none none" },

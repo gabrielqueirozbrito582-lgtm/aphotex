@@ -45,7 +45,7 @@ export default function SobrePage() {
       });
 
       // Valores cards
-      gsap.utils.toArray<Element>(".sb-valor").forEach((el, i) => {
+      (gsap.utils.toArray(".sb-valor") as Element[]).forEach((el, i) => {
         gsap.from(el, {
           y: 40, opacity: 0, duration: 0.6, delay: i * 0.08, ease: "power3.out",
           scrollTrigger: { trigger: ".sb-valores", start: "top 80%", toggleActions: "play none none none" },
@@ -53,7 +53,7 @@ export default function SobrePage() {
       });
 
       // Stats
-      gsap.utils.toArray<Element>(".sb-stat").forEach((el, i) => {
+      (gsap.utils.toArray(".sb-stat") as Element[]).forEach((el, i) => {
         gsap.from(el, {
           y: 30, opacity: 0, duration: 0.6, delay: i * 0.12, ease: "power3.out",
           scrollTrigger: { trigger: ".sb-stats", start: "top 82%", toggleActions: "play none none none" },

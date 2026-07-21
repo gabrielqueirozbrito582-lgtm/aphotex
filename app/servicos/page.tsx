@@ -41,7 +41,7 @@ export default function ServicosPage() {
       });
 
       // Reveal sections
-      gsap.utils.toArray<Element>(".s-reveal").forEach((el) => {
+      (gsap.utils.toArray(".s-reveal") as Element[]).forEach((el) => {
         gsap.from(el, {
           y: 40, opacity: 0, duration: 0.7, ease: "power3.out",
           scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
@@ -49,7 +49,7 @@ export default function ServicosPage() {
       });
 
       // Card stagger groups
-      gsap.utils.toArray<Element>(".s-card-group").forEach((group) => {
+      (gsap.utils.toArray(".s-card-group") as Element[]).forEach((group) => {
         const cards = (group as HTMLElement).querySelectorAll(".s-card");
         gsap.from(cards, {
           y: 50, opacity: 0, duration: 0.65, stagger: 0.1, ease: "power3.out",
@@ -58,7 +58,7 @@ export default function ServicosPage() {
       });
 
       // Steps
-      gsap.utils.toArray<Element>(".s-step").forEach((el, i) => {
+      (gsap.utils.toArray(".s-step") as Element[]).forEach((el, i) => {
         gsap.from(el, {
           y: 40, opacity: 0, duration: 0.6, delay: i * 0.1, ease: "power3.out",
           scrollTrigger: { trigger: ".s-steps", start: "top 80%", toggleActions: "play none none none" },
