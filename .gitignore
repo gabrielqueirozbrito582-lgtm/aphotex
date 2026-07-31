@@ -46,3 +46,6 @@ design_files/
 
 # claude internal
 .claude/
+
+.vercel
+package-lock.json
