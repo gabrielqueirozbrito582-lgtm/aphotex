@@ -137,7 +137,7 @@ export default function Home() {
         });
 
         /* section reveals */
-        gsap.utils.toArray<HTMLElement>(".reveal").forEach((el) => {
+        (gsap.utils.toArray(".reveal") as HTMLElement[]).forEach((el) => {
           gsap.from(el, {
             opacity: 0, y: 36, duration: 0.7, ease: "power2.out",
             scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" },
