@@ -58,14 +58,17 @@ export default function ContatoPage() {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }));
   };
 
+  const WEBHOOK_URL =
+    "https://script.google.com/macros/s/AKfycby-pa7U9KZhEIu44yIfXl8olFPqxoPiVcqB0PYGCgP5U838cvzFGXMXxyXl1jGWp7k4/exec";
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(WEBHOOK_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "text/plain" },
         body: JSON.stringify(form),
       });
       if (!res.ok) throw new Error("Erro ao enviar");
