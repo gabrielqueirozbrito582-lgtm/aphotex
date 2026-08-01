@@ -152,7 +152,7 @@ export default function Nav() {
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
               style={{
                 position: "fixed",
                 top: 0,
