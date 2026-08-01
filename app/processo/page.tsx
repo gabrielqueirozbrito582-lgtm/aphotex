@@ -53,23 +53,6 @@ export default function ProcessoPage() {
         {/* Header */}
         <section style={{ padding: "6rem 2rem 4rem" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              style={{
-                fontFamily: "var(--font-sans)",
-                fontSize: "0.65rem",
-                fontWeight: 500,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "#D4A73C",
-                marginBottom: "1.5rem",
-              }}
-            >
-              EDIÇÃO 01 · 2026
-            </motion.p>
-
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}

@@ -65,16 +65,11 @@ export default function Home() {
         >
           <div
             style={{
-              maxWidth: 1280,
+              maxWidth: 900,
               margin: "0 auto",
               width: "100%",
-              display: "grid",
-              gridTemplateColumns: "3fr 2fr",
-              gap: "4rem",
-              alignItems: "center",
             }}
-            className="hero-grid"
-          >
+            >
             {/* Esquerda */}
             <motion.div
               variants={stagger}
@@ -82,21 +77,6 @@ export default function Home() {
               animate="show"
               style={{ display: "flex", flexDirection: "column" }}
             >
-              <motion.p
-                variants={fadeUp}
-                style={{
-                  fontFamily: "var(--font-sans)",
-                  fontSize: "0.68rem",
-                  fontWeight: 500,
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "#D4A73C",
-                  marginBottom: "1.5rem",
-                }}
-              >
-                APHOTEX — EDIÇÃO 01 · 2026
-              </motion.p>
-
               <motion.h1
                 variants={fadeUp}
                 style={{
@@ -177,34 +157,10 @@ export default function Home() {
                   paddingTop: "1.25rem",
                 }}
               >
-                VAGAS LIMITADAS · PREÇOS DE LANÇAMENTO
+                PREÇOS DA EDIÇÃO 01 · VÁLIDO ATÉ 31 DE MARÇO DE 2027
               </motion.p>
             </motion.div>
 
-            {/* Direita — número editorial */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.4 }}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                userSelect: "none",
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "var(--font-serif)",
-                  fontSize: "clamp(8rem, 18vw, 18rem)",
-                  fontWeight: 400,
-                  color: "#E5DFCF",
-                  lineHeight: 0.85,
-                }}
-              >
-                01
-              </span>
-            </motion.div>
           </div>
         </section>
 
@@ -272,7 +228,7 @@ export default function Home() {
                 marginBottom: "3rem",
               }}
             >
-              II. FILOSOFIA
+              FILOSOFIA
             </motion.p>
 
             <div
@@ -353,7 +309,7 @@ export default function Home() {
                   marginBottom: "1rem",
                 }}
               >
-                III. O QUE FAZEMOS
+                O QUE FAZEMOS
               </p>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
@@ -443,14 +399,14 @@ export default function Home() {
                 marginBottom: "4rem",
               }}
             >
-              IV. EM NÚMEROS
+              EM NÚMEROS
             </p>
 
             <div
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(4, 1fr)",
-                gap: "2rem",
+                gap: "3.5rem",
               }}
               className="stats-grid"
             >
@@ -589,7 +545,7 @@ export default function Home() {
                 marginBottom: "2.5rem",
               }}
             >
-              PREÇOS DE LANÇAMENTO — VAGAS LIMITADAS
+              PREÇOS DA EDIÇÃO 01 · VÁLIDO ATÉ 31 DE MARÇO DE 2027
             </motion.p>
 
             <motion.div variants={fadeUp}>
@@ -620,8 +576,6 @@ export default function Home() {
 
       <style>{`
         @media (max-width: 768px) {
-          .hero-grid { grid-template-columns: 1fr !important; }
-          .hero-grid > div:last-child { display: none !important; }
           .two-col-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
           .principle-row { grid-template-columns: 60px 1fr !important; gap: 1.5rem !important; }
           .principle-row > p { grid-column: 1 / -1 !important; }

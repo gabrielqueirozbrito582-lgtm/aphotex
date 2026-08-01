@@ -173,7 +173,7 @@ export default function Footer() {
               Créditos
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-              {["Design & desenvolvimento", "Gabriel R.", "São Paulo, Brasil", "2026"].map((line) => (
+              {["Design & desenvolvimento", "Gabriel Queiroz Brito", "São Paulo, Brasil", "2026"].map((line) => (
                 <p
                   key={line}
                   style={{

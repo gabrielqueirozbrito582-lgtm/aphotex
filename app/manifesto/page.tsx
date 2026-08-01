@@ -14,7 +14,7 @@ const fadeUp: Variants = {
 
 const sections = [
   {
-    num: "I.",
+    num: "",
     title: "Sobre autoridade real",
     body: [
       "Autoridade real é a que se constrói em consultório, escritório ou sala de aula — em anos de estudo, de prática, de erros e de acertos que nenhuma certificação no mundo resume completamente. É o tipo de autoridade que os seus clientes já reconhecem. Que as suas indicações confirmam. Que o mercado, ainda que lentamente, começa a ver.",
@@ -23,7 +23,7 @@ const sections = [
     ],
   },
   {
-    num: "II.",
+    num: "",
     title: "Sobre presença digital que fecha por você",
     body: [
       "O melhor site é aquele que trabalha enquanto você atende, enquanto você dorme, enquanto você está em férias. Que filtra clientes que não têm fit, que qualifica quem tem, que entrega a mensagem certa no momento certo — sem você precisar estar presente para isso.",
@@ -32,7 +32,7 @@ const sections = [
     ],
   },
   {
-    num: "III.",
+    num: "",
     title: "Sobre o custo invisível de parecer amador",
     body: [
       "Existe um custo que nenhuma planilha contabiliza: o custo da hesitação. O cliente que chegou ao seu site, ficou 30 segundos, e saiu sem entrar em contato. Você nunca soube que ele existiu. Nunca teve a chance de mostrar o seu trabalho. Perdeu sem saber que estava competindo.",
@@ -41,7 +41,7 @@ const sections = [
     ],
   },
   {
-    num: "IV.",
+    num: "",
     title: "Sobre por que não fazemos qualquer site",
     body: [
       "Poderíamos atender mais clientes se aceitássemos qualquer projeto. Poderíamos crescer mais rápido se usássemos templates e diminuíssemos o tempo de produção. Mas não é isso que queremos construir.",
@@ -50,7 +50,7 @@ const sections = [
     ],
   },
   {
-    num: "V.",
+    num: "",
     title: "O que oferecemos, em resumo",
     body: [
       "Sites e design visual criados do zero para profissionais liberais. Processo transparente, prazos fixos, design exclusivo. Sem template, sem atalho, sem letra miúda.",
@@ -68,23 +68,6 @@ export default function ManifestoPage() {
         {/* Header */}
         <section style={{ padding: "6rem 2rem 4rem" }}>
           <div style={{ maxWidth: 900, margin: "0 auto" }}>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              style={{
-                fontFamily: "var(--font-sans)",
-                fontSize: "0.65rem",
-                fontWeight: 500,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "#D4A73C",
-                marginBottom: "1.5rem",
-              }}
-            >
-              EDIÇÃO 01 · NOVEMBRO 2026
-            </motion.p>
-
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -226,7 +209,7 @@ export default function ManifestoPage() {
                   color: "#1B2D4F",
                 }}
               >
-                Gabriel R.
+                Gabriel Queiroz Brito
               </p>
               <p
                 style={{

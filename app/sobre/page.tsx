@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 
 const secoes = [
   {
-    num: "I.",
+    num: "",
     title: "De onde viemos",
     body: [
       "A Aphotex nasceu de uma observação recorrente: profissionais excepcionais com presença digital genérica. Terapeutas que transformam vidas atendendo com um site de 2012. Advogados que fecham contratos complexos com Instagram sem identidade. Consultores que cobram por hora o que agências cobram por projeto — mas aparecem online como freelancers iniciantes.",
@@ -15,7 +15,7 @@ const secoes = [
     ],
   },
   {
-    num: "II.",
+    num: "",
     title: "Por quem trabalhamos",
     body: [
       "Trabalhamos para profissionais liberais que já têm autoridade no que fazem, mas ainda não têm uma presença digital à altura dessa autoridade. Psicólogos, advogados, coaches, nutricionistas, consultores, médicos, arquitetos, professores e qualquer profissional que venda o próprio conhecimento.",
@@ -23,7 +23,7 @@ const secoes = [
     ],
   },
   {
-    num: "III.",
+    num: "",
     title: "Como pensamos design",
     body: [
       "Design, para nós, não é estética. É comunicação. Cada decisão visual — a escolha da fonte, a proporção dos espaços, a hierarquia das informações — comunica algo antes que qualquer palavra seja lida. Um site mal projetado diz 'não confie em mim' antes de você chegar ao primeiro parágrafo.",
@@ -32,11 +32,11 @@ const secoes = [
     ],
   },
   {
-    num: "IV.",
+    num: "",
     title: "O que buscamos",
     body: [
       "Buscamos construir um portfólio que seja, em si mesmo, uma declaração de padrão. Cada projeto entregue deve ser capaz de ficar em uma galeria de referências ao lado de trabalhos de estúdios internacionais — não porque somos maiores que eles, mas porque aplicamos o mesmo rigor.",
-      "A Aphotex está em sua Edição 01 — momento de construção da base do estúdio. Trabalhamos com preços promocionais para os primeiros 10 clientes, em contrapartida ao uso dos projetos como parte do portfólio inaugural. Uma troca honesta: você recebe qualidade de estúdio premium por preço de lançamento; nós construímos referências reais.",
+      "A Aphotex nasceu com uma proposta clara: crescer por edições. Cada edição do estúdio marca um ciclo — com posicionamento próprio, tabela de valores e evolução no trabalho. Estamos hoje na Edição 01, ciclo que vai de agosto de 2026 a março de 2027. É aqui que começamos a construir o padrão que queremos deixar como assinatura.",
     ],
   },
 ];
@@ -49,23 +49,6 @@ export default function SobrePage() {
       <main style={{ background: "#F5F1E8" }}>
         <section style={{ padding: "6rem 2rem 4rem" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              style={{
-                fontFamily: "var(--font-sans)",
-                fontSize: "0.65rem",
-                fontWeight: 500,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "#D4A73C",
-                marginBottom: "1.5rem",
-              }}
-            >
-              EDIÇÃO 01 · 2026
-            </motion.p>
-
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -134,7 +117,7 @@ export default function SobrePage() {
                 <span style={{ fontFamily: "var(--font-serif)", fontSize: "2rem", color: "#F5F1E8", opacity: 0.4 }}>GR</span>
               </div>
               <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "1.3rem", color: "#F5F1E8" }}>
-                Gabriel R.
+                Gabriel Queiroz Brito
               </p>
               <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.65rem", fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: "#D4A73C" }}>
                 Fundador · Aphotex Design

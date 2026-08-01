@@ -128,32 +128,28 @@ const manutencao = {
 
 const faq = [
   {
-    q: "Por que preços promocionais?",
-    a: "Estamos em fase de lançamento — Edição 01. Os primeiros 10 clientes recebem preço reduzido em contrapartida à autorização de uso do projeto como case público. Uma troca justa.",
+    q: "Por que a Aphotex trabalha por edições?",
+    a: "Cada edição é um ciclo do estúdio — com posicionamento próprio, tabela de valores e evolução no processo. Isso nos permite crescer com intenção, refinando o trabalho a cada nova edição, em vez de manter tudo estático.",
   },
   {
-    q: "Até quando vão durar os preços de lançamento?",
-    a: "Até completarmos 10 clientes de portfolio ou até 31 de janeiro de 2027 — o que vier primeiro.",
+    q: "Os preços da Edição 01 vão mudar?",
+    a: "Sim. A partir de 1º de abril de 2027, a Edição 02 entra em vigor com nova tabela de valores. Todos os projetos contratados dentro da Edição 01 mantêm os valores acordados, independentemente da data de entrega.",
   },
   {
-    q: "Os preços vão subir depois?",
-    a: "Sim. Após completar 10 clientes no portfolio, os valores retornam ao padrão da tabela original.",
+    q: "O que vai mudar na Edição 02?",
+    a: "Nossa expectativa é ampliar escopo, refinar processo e ajustar valores para refletir a evolução do estúdio. Detalhes serão comunicados no lançamento da nova edição.",
   },
   {
-    q: "Como funciona a autorização de uso como case?",
-    a: "Você autoriza mencionar o projeto no portfolio da Aphotex, com sua foto ou logo, e permite depoimento em vídeo curto após a entrega. Simples e transparente.",
+    q: "Como funciona o pagamento?",
+    a: "50% de entrada para iniciar o projeto. 50% na entrega final. Pix, boleto ou cartão em até 6x.",
   },
   {
-    q: "E se eu não quiser autorizar uso como case?",
-    a: "Sem problema. Nesse caso o investimento fica no valor cheio da tabela original.",
+    q: "Prazo é fixo?",
+    a: "Sim. Prazo combinado é prazo cumprido — sem desculpa, sem surpresa. Se por qualquer motivo tivermos atraso, isso é comunicado com antecedência e negociado.",
   },
   {
-    q: "Quais são as formas de pagamento?",
-    a: "Pix, boleto ou cartão em até 6x sem juros. 50% de entrada na aprovação, 50% na entrega.",
-  },
-  {
-    q: "O prazo é fixo?",
-    a: "Sim. Prazo combinado é prazo cumprido — sem desculpa, sem surpresa. É um compromisso que levamos a sério.",
+    q: "E se eu não gostar do resultado?",
+    a: "Cada pacote inclui 30 dias de ajustes finos após entrega. Nosso processo é feito para minimizar retrabalho: briefing detalhado + aprovações intermediárias = resultado alinhado desde o início.",
   },
 ];
 
@@ -166,23 +162,6 @@ export default function ServicosPage() {
         {/* Header */}
         <section style={{ padding: "6rem 2rem 4rem" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              style={{
-                fontFamily: "var(--font-sans)",
-                fontSize: "0.65rem",
-                fontWeight: 500,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "#D4A73C",
-                marginBottom: "1.5rem",
-              }}
-            >
-              EDIÇÃO 01 · 2026
-            </motion.p>
-
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -255,7 +234,7 @@ export default function ServicosPage() {
                 marginBottom: "1.25rem",
               }}
             >
-              Preços de lançamento — Edição 01
+              Preços da Edição 01
             </h2>
             <p
               style={{
@@ -266,8 +245,9 @@ export default function ServicosPage() {
                 marginBottom: "1.25rem",
               }}
             >
-              A Aphotex está em fase de construção do portfolio inicial. Os primeiros 10 clientes recebem preços
-              promocionais em contrapartida à autorização de uso do projeto como case público.
+              A Edição 01 da Aphotex representa nosso primeiro ciclo. Os valores especiais desta edição são válidos
+              até 31 de março de 2027. A partir de abril, entramos na Edição 02 — com nova tabela, novo refinamento
+              visual, novo posicionamento.
             </p>
             <p
               style={{
@@ -280,7 +260,7 @@ export default function ServicosPage() {
                 opacity: 0.7,
               }}
             >
-              VAGAS LIMITADAS · APENAS OS 10 PRIMEIROS CLIENTES
+              VÁLIDO ATÉ 31 DE MARÇO DE 2027
             </p>
           </motion.div>
         </section>
@@ -357,7 +337,7 @@ export default function ServicosPage() {
                       marginBottom: "0.5rem",
                     }}
                   >
-                    Promocional de lançamento
+                    Edição 01
                   </p>
 
                   <p
