@@ -2,92 +2,221 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer style={{ background: "var(--green-800)", color: "var(--white)" }}>
-      <div style={{
-        maxWidth: "var(--container)", margin: "0 auto",
-        padding: "64px 24px 36px",
-        display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr", gap: 48,
-      }}>
-        {/* Brand */}
-        <div>
-          <div style={{
-            display: "inline-flex", alignItems: "baseline", gap: 3,
-            font: `700 24px/1 var(--font-poppins)`,
-            fontFamily: "var(--font-poppins)",
-            color: "var(--white)", letterSpacing: "-0.02em",
-          }}>
-            Aphotex
-            <span style={{
-              width: 7, height: 7, borderRadius: "50%",
-              background: "var(--lime-500)",
-              display: "inline-block", alignSelf: "flex-end", marginBottom: 4,
-            }} />
+    <footer style={{ background: "#1B2D4F", color: "#F5F1E8" }}>
+      <div
+        style={{
+          maxWidth: 1280,
+          margin: "0 auto",
+          padding: "5rem 2rem 3rem",
+        }}
+      >
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "3rem",
+          }}
+          className="footer-grid"
+        >
+          {/* Col 1 — Marca */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+            <span
+              style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "1.8rem",
+                fontWeight: 400,
+                color: "#F5F1E8",
+                lineHeight: 1,
+              }}
+            >
+              APHOTEX
+            </span>
+            <p
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.85rem",
+                color: "rgba(245,241,232,0.6)",
+                lineHeight: 1.6,
+                marginTop: "0.25rem",
+              }}
+            >
+              Estúdio editorial de design premium
+            </p>
+            <span
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.65rem",
+                fontWeight: 500,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#D4A73C",
+                marginTop: "0.5rem",
+              }}
+            >
+              DESIGN — ESTÚDIO EDITORIAL · EDIÇÃO 01 · 2026
+            </span>
           </div>
-          <p style={{
-            font: "var(--text-sm)", fontFamily: "var(--font-poppins)",
-            color: "var(--green-200)", maxWidth: 300, marginTop: 16,
-          }}>
-            Presença digital estratégica para profissionais que vivem da própria expertise. Design exclusivo, prazo fixo, suporte real.
+
+          {/* Col 2 — Navegação */}
+          <div>
+            <p
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.65rem",
+                fontWeight: 500,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "rgba(245,241,232,0.4)",
+                marginBottom: "1.25rem",
+              }}
+            >
+              Navegação
+            </p>
+            <nav style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+              {[
+                { href: "/", label: "Início" },
+                { href: "/manifesto", label: "Manifesto" },
+                { href: "/processo", label: "Processo" },
+                { href: "/servicos", label: "Serviços" },
+                { href: "/sobre", label: "Sobre" },
+                { href: "/contato", label: "Contato" },
+              ].map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "0.85rem",
+                    color: "rgba(245,241,232,0.7)",
+                    transition: "color 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#F5F1E8")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245,241,232,0.7)")}
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Col 3 — Contato */}
+          <div>
+            <p
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.65rem",
+                fontWeight: 500,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "rgba(245,241,232,0.4)",
+                marginBottom: "1.25rem",
+              }}
+            >
+              Contato
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+              <a
+                href="https://wa.me/5511999999999"
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.85rem",
+                  color: "rgba(245,241,232,0.7)",
+                }}
+              >
+                WhatsApp
+              </a>
+              <a
+                href="mailto:contato@aphotexdesign.com.br"
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.85rem",
+                  color: "rgba(245,241,232,0.7)",
+                }}
+              >
+                contato@aphotexdesign.com.br
+              </a>
+              <p
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.78rem",
+                  color: "rgba(245,241,232,0.4)",
+                  marginTop: "0.5rem",
+                }}
+              >
+                Resposta em até 2h úteis
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.78rem",
+                  color: "rgba(245,241,232,0.4)",
+                }}
+              >
+                100% online · Todo o Brasil
+              </p>
+            </div>
+          </div>
+
+          {/* Col 4 — Créditos */}
+          <div>
+            <p
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.65rem",
+                fontWeight: 500,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "rgba(245,241,232,0.4)",
+                marginBottom: "1.25rem",
+              }}
+            >
+              Créditos
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              {["Design & desenvolvimento", "Gabriel R.", "São Paulo, Brasil", "2026"].map((line) => (
+                <p
+                  key={line}
+                  style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "0.85rem",
+                    color: "rgba(245,241,232,0.6)",
+                  }}
+                >
+                  {line}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div
+          style={{
+            borderTop: "1px solid rgba(245,241,232,0.08)",
+            marginTop: "3rem",
+            paddingTop: "1.5rem",
+          }}
+        >
+          <p
+            style={{
+              fontFamily: "var(--font-sans)",
+              fontSize: "0.72rem",
+              color: "rgba(245,241,232,0.3)",
+              letterSpacing: "0.06em",
+            }}
+          >
+            © 2026 Aphotex Design. Feito com atenção aos detalhes.
           </p>
         </div>
-
-        {/* Nav */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          <div style={{
-            font: `600 13px/1 var(--font-poppins)`, fontFamily: "var(--font-poppins)",
-            letterSpacing: "0.12em", textTransform: "uppercase",
-            color: "var(--lime-500)", marginBottom: 4,
-          }}>
-            Navegação
-          </div>
-          {[
-            { href: "/", label: "Início" },
-            { href: "/servicos", label: "Serviços e preços" },
-            { href: "/sobre", label: "Sobre a Aphotex" },
-            { href: "/contato", label: "Solicitar proposta" },
-          ].map(({ href, label }) => (
-            <Link key={href} href={href} style={{
-              font: "var(--text-sm)", fontFamily: "var(--font-poppins)",
-              color: "var(--green-200)",
-            }}>
-              {label}
-            </Link>
-          ))}
-        </div>
-
-        {/* Contact */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          <div style={{
-            font: `600 13px/1 var(--font-poppins)`, fontFamily: "var(--font-poppins)",
-            letterSpacing: "0.12em", textTransform: "uppercase",
-            color: "var(--lime-500)", marginBottom: 4,
-          }}>
-            Contato
-          </div>
-          {["WhatsApp · resposta em horas", "100% online · todo o Brasil", "Proposta em até 2h úteis"].map(t => (
-            <span key={t} style={{
-              font: "var(--text-sm)", fontFamily: "var(--font-poppins)",
-              color: "var(--green-200)",
-            }}>
-              {t}
-            </span>
-          ))}
-        </div>
       </div>
 
-      <div style={{ borderTop: "1px solid rgba(255,255,255,0.12)" }}>
-        <div style={{
-          maxWidth: "var(--container)", margin: "0 auto",
-          padding: "20px 24px",
-          display: "flex", justifyContent: "space-between",
-          gap: 16, flexWrap: "wrap",
-          font: "var(--text-xs)", fontFamily: "var(--font-poppins)",
-          color: "var(--green-300)",
-        }}>
-          <span>© 2026 Aphotex Design. Todos os direitos reservados.</span>
-          <span>Design exclusivo, nunca template.</span>
-        </div>
-      </div>
+      <style>{`
+        @media (max-width: 900px) {
+          .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 2.5rem !important; }
+        }
+        @media (max-width: 560px) {
+          .footer-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </footer>
   );
 }

@@ -1,216 +1,228 @@
 "use client";
-import { useEffect } from "react";
+
+import Link from "next/link";
+import { motion } from "framer-motion";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import Link from "next/link";
 
-declare global { interface Window { gsap: any; ScrollTrigger: any } }
-
-function waitGSAP(cb: () => void) {
-  if (typeof window !== "undefined" && window.gsap && window.ScrollTrigger) { cb(); return; }
-  const t = setInterval(() => {
-    if (typeof window !== "undefined" && window.gsap && window.ScrollTrigger) { clearInterval(t); cb(); }
-  }, 80);
-}
+const secoes = [
+  {
+    num: "I.",
+    title: "De onde viemos",
+    body: [
+      "A Aphotex nasceu de uma observação recorrente: profissionais excepcionais com presença digital genérica. Terapeutas que transformam vidas atendendo com um site de 2012. Advogados que fecham contratos complexos com Instagram sem identidade. Consultores que cobram por hora o que agências cobram por projeto — mas aparecem online como freelancers iniciantes.",
+      "A distância entre quem esses profissionais são e o que a internet mostra sobre eles é real, é mensurável e tem custo. Criamos a Aphotex para fechar essa distância — com design, copy e estratégia pensados especificamente para quem vive de expertise.",
+    ],
+  },
+  {
+    num: "II.",
+    title: "Por quem trabalhamos",
+    body: [
+      "Trabalhamos para profissionais liberais que já têm autoridade no que fazem, mas ainda não têm uma presença digital à altura dessa autoridade. Psicólogos, advogados, coaches, nutricionistas, consultores, médicos, arquitetos, professores e qualquer profissional que venda o próprio conhecimento.",
+      "Não trabalhamos para qualquer tipo de negócio. Essa especialização não é capricho — é o que garante que entendemos profundamente as nuances do seu mercado, as dúvidas dos seus clientes e a linguagem que constrói confiança no seu nicho específico.",
+    ],
+  },
+  {
+    num: "III.",
+    title: "Como pensamos design",
+    body: [
+      "Design, para nós, não é estética. É comunicação. Cada decisão visual — a escolha da fonte, a proporção dos espaços, a hierarquia das informações — comunica algo antes que qualquer palavra seja lida. Um site mal projetado diz 'não confie em mim' antes de você chegar ao primeiro parágrafo.",
+      "Trabalhamos com referências editoriais: revistas independentes, estúdios internacionais, publicações que transformaram tipografia e espaço em branco em linguagem própria. Não porque queremos copiar, mas porque esse padrão visual transmite algo específico: atenção, intenção, qualidade.",
+      "Cada site que criamos tem conceito visual único. Uma paleta pensada. Uma tipografia escolhida. Um ritmo de layout que reflete a personalidade do profissional — não um template com cores trocadas.",
+    ],
+  },
+  {
+    num: "IV.",
+    title: "O que buscamos",
+    body: [
+      "Buscamos construir um portfólio que seja, em si mesmo, uma declaração de padrão. Cada projeto entregue deve ser capaz de ficar em uma galeria de referências ao lado de trabalhos de estúdios internacionais — não porque somos maiores que eles, mas porque aplicamos o mesmo rigor.",
+      "A Aphotex está em sua Edição 01 — momento de construção da base do estúdio. Trabalhamos com preços promocionais para os primeiros 10 clientes, em contrapartida ao uso dos projetos como parte do portfólio inaugural. Uma troca honesta: você recebe qualidade de estúdio premium por preço de lançamento; nós construímos referências reais.",
+    ],
+  },
+];
 
 export default function SobrePage() {
-  useEffect(() => {
-    waitGSAP(() => {
-      const { gsap, ScrollTrigger } = window;
-      gsap.registerPlugin(ScrollTrigger);
-
-      // Hero
-      gsap.from(".sb-hero > *", {
-        y: 30, opacity: 0, duration: 0.75, stagger: 0.12, ease: "power3.out",
-      });
-
-      // Narrativa 2-col
-      gsap.from(".sb-narr-left", {
-        x: -40, opacity: 0, duration: 0.8, ease: "power3.out",
-        scrollTrigger: { trigger: ".sb-narr", start: "top 80%", toggleActions: "play none none none" },
-      });
-      gsap.from(".sb-narr-right", {
-        x: 40, opacity: 0, duration: 0.8, ease: "power3.out",
-        scrollTrigger: { trigger: ".sb-narr", start: "top 80%", toggleActions: "play none none none" },
-      });
-
-      // Antes/Depois
-      gsap.from(".sb-before", {
-        x: -40, opacity: 0, duration: 0.7, ease: "power3.out",
-        scrollTrigger: { trigger: ".sb-bd", start: "top 82%", toggleActions: "play none none none" },
-      });
-      gsap.from(".sb-after", {
-        x: 40, opacity: 0, duration: 0.7, ease: "power3.out",
-        scrollTrigger: { trigger: ".sb-bd", start: "top 82%", toggleActions: "play none none none" },
-      });
-
-      // Valores cards
-      (gsap.utils.toArray(".sb-valor") as Element[]).forEach((el, i) => {
-        gsap.from(el, {
-          y: 40, opacity: 0, duration: 0.6, delay: i * 0.08, ease: "power3.out",
-          scrollTrigger: { trigger: ".sb-valores", start: "top 80%", toggleActions: "play none none none" },
-        });
-      });
-
-      // Stats
-      (gsap.utils.toArray(".sb-stat") as Element[]).forEach((el, i) => {
-        gsap.from(el, {
-          y: 30, opacity: 0, duration: 0.6, delay: i * 0.12, ease: "power3.out",
-          scrollTrigger: { trigger: ".sb-stats", start: "top 82%", toggleActions: "play none none none" },
-        });
-      });
-
-      // CTA
-      gsap.from(".sb-cta > *", {
-        y: 24, opacity: 0, duration: 0.7, stagger: 0.12, ease: "power3.out",
-        scrollTrigger: { trigger: ".sb-cta", start: "top 85%", toggleActions: "play none none none" },
-      });
-
-      // Hover on valor cards
-      document.querySelectorAll<HTMLElement>(".sb-valor").forEach(card => {
-        card.addEventListener("mouseenter", () => gsap.to(card, { y: -4, boxShadow: "0 12px 32px rgba(14,42,30,0.12)", duration: 0.22, ease: "power2.out" }));
-        card.addEventListener("mouseleave", () => gsap.to(card, { y: 0, boxShadow: "none", duration: 0.3, ease: "power2.inOut" }));
-      });
-    });
-  }, []);
-
   return (
     <>
       <Nav />
-      <main>
-        {/* HEADER */}
-        <section style={{ background: "var(--neutral-100)", padding: "72px 24px 64px" }}>
-          <div className="sb-hero" style={{ maxWidth: 820, margin: "0 auto", textAlign: "center" }}>
-            <span className="rd-eyebrow">Sobre a Aphotex</span>
-            <h1 style={{
-              font: "700 46px/1.12 var(--font-poppins)", fontFamily: "var(--font-poppins)",
-              color: "var(--green-800)", letterSpacing: "-0.02em", margin: "20px 0 0",
-              textWrap: "balance" as never,
-            }}>
-              Existimos para resolver uma <span className="rd-mark">incoerência</span> específica.
-            </h1>
-            <p style={{ font: "var(--text-lg)", fontFamily: "var(--font-poppins)", color: "var(--text-body)", margin: "22px auto 0", maxWidth: 660 }}>
-              Profissionais excepcionais com uma imagem digital que não reflete essa excelência. A Aphotex Design fecha a distância entre quem você é e o que a internet mostra sobre você.
-            </p>
+
+      <main style={{ background: "#F5F1E8" }}>
+        <section style={{ padding: "6rem 2rem 4rem" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.65rem",
+                fontWeight: 500,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "#D4A73C",
+                marginBottom: "1.5rem",
+              }}
+            >
+              EDIÇÃO 01 · 2026
+            </motion.p>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "clamp(4rem, 10vw, 8rem)",
+                fontWeight: 400,
+                lineHeight: 0.95,
+                color: "#1B2D4F",
+                marginBottom: "3rem",
+              }}
+            >
+              Sobre
+            </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              style={{ borderTop: "1px solid #E5DFCF", paddingTop: "2rem", maxWidth: 680 }}
+            >
+              <p
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  fontStyle: "italic",
+                  fontSize: "clamp(1.1rem, 2.2vw, 1.45rem)",
+                  lineHeight: 1.6,
+                  color: "#1B2D4F",
+                }}
+              >
+                Somos um estúdio editorial de design premium, fundado com uma missão simples: dar presença digital ao trabalho de quem não pode parecer amador.
+              </p>
+            </motion.div>
           </div>
         </section>
 
-        {/* NARRATIVA */}
-        <section style={{ background: "var(--white)", padding: "88px 24px" }}>
-          <div className="sb-narr" style={{ maxWidth: 1080, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "center" }}>
-            <div className="sb-narr-left">
-              <span className="rd-eyebrow">Nosso propósito</span>
-              <h2 style={{ font: "700 34px/1.18 var(--font-poppins)", fontFamily: "var(--font-poppins)", color: "var(--green-800)", letterSpacing: "-0.02em", margin: "18px 0 0" }}>
-                Não criamos "site bonito". Criamos presença que vende por você.
-              </h2>
-              <p style={{ font: "var(--text-base)", fontFamily: "var(--font-poppins)", color: "var(--text-body)", margin: "20px 0 0" }}>
-                Presença digital estratégica transmite autoridade desde o primeiro segundo, converte visitantes em clientes e faz o seu nome aparecer como referência no digital.
+        {/* Fundador */}
+        <section style={{ padding: "0 2rem 4rem" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              style={{
+                background: "#1B2D4F",
+                padding: "3rem",
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem",
+                maxWidth: 480,
+              }}
+            >
+              <div
+                style={{
+                  width: 80,
+                  height: 80,
+                  background: "rgba(245,241,232,0.08)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: "0.5rem",
+                }}
+              >
+                <span style={{ fontFamily: "var(--font-serif)", fontSize: "2rem", color: "#F5F1E8", opacity: 0.4 }}>GR</span>
+              </div>
+              <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "1.3rem", color: "#F5F1E8" }}>
+                Gabriel R.
               </p>
-              <p style={{ font: "var(--text-base)", fontFamily: "var(--font-poppins)", color: "var(--text-body)", margin: "16px 0 0" }}>
-                E fazemos isso em <strong style={{ color: "var(--green-800)" }}>dias, não em meses</strong>. Com design exclusivo, nunca template. Por uma fração do custo de uma agência tradicional.
+              <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.65rem", fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: "#D4A73C" }}>
+                Fundador · Aphotex Design
               </p>
-            </div>
-            <div className="sb-narr-right" style={{ position: "relative" }}>
-              {/* Image placeholder */}
-              <div style={{
-                width: "100%", height: 420, borderRadius: 22,
-                background: "linear-gradient(135deg, var(--green-100) 0%, var(--green-200) 100%)",
-                boxShadow: "var(--shadow-lg)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-              }}>
-                <div style={{ textAlign: "center" }}>
-                  <div style={{ font: "700 48px/1 var(--font-poppins)", color: "var(--green-400)" }}>A</div>
-                  <div style={{ font: "600 14px/1 var(--font-poppins)", color: "var(--green-600)", marginTop: 8 }}>Aphotex Design</div>
+              <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.85rem", lineHeight: 1.65, color: "rgba(245,241,232,0.6)", marginTop: "0.5rem" }}>
+                São Paulo, Brasil · 2026
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Seções */}
+        <section style={{ padding: "0 2rem 8rem" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            {secoes.map((s, i) => (
+              <motion.article
+                key={s.num}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.65, delay: i * 0.05 }}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 2fr",
+                  gap: "4rem",
+                  paddingTop: "4rem",
+                  paddingBottom: "4rem",
+                  borderBottom: "1px solid #E5DFCF",
+                }}
+                className="sobre-row"
+              >
+                <div>
+                  <span style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "0.95rem", color: "#D4A73C", display: "block", marginBottom: "0.75rem" }}>
+                    {s.num}
+                  </span>
+                  <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(1.4rem, 2.8vw, 2rem)", fontWeight: 400, color: "#1B2D4F", lineHeight: 1.25 }}>
+                    {s.title}
+                  </h2>
                 </div>
-              </div>
-              <div style={{
-                position: "absolute", right: -18, bottom: 28,
-                display: "inline-flex", alignItems: "center", gap: 12,
-                background: "var(--green-800)", color: "var(--white)",
-                borderRadius: "var(--radius-pill)", padding: "14px 22px",
-                boxShadow: "var(--shadow-md)",
-              }}>
-                <span style={{ font: "700 22px/1 var(--font-poppins)", fontFamily: "var(--font-poppins)" }}>2h</span>
-                <span style={{ font: "500 12px/1.25 var(--font-poppins)", fontFamily: "var(--font-poppins)", color: "var(--green-200)", maxWidth: 110 }}>para receber sua proposta personalizada</span>
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* ANTES / DEPOIS */}
-        <section style={{ background: "var(--neutral-100)", padding: "80px 24px" }}>
-          <div className="sb-bd" style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22 }}>
-            <div className="sb-before" style={{ background: "var(--white)", border: "1px solid var(--neutral-200)", borderRadius: "var(--radius-lg)", padding: 36, boxShadow: "var(--shadow-sm)" }}>
-              <div style={{ font: "600 13px/1 var(--font-poppins)", fontFamily: "var(--font-poppins)", letterSpacing: "0.12em", textTransform: "uppercase" as never, color: "var(--neutral-500)" }}>Antes</div>
-              <p style={{ font: "600 22px/1.45 var(--font-poppins)", fontFamily: "var(--font-poppins)", color: "var(--neutral-700)", margin: "16px 0 0" }}>
-                Clientes que hesitam porque a imagem online não convence.
-              </p>
-            </div>
-            <div className="sb-after" style={{ background: "var(--green-800)", borderRadius: "var(--radius-lg)", padding: 36, boxShadow: "var(--shadow-md)" }}>
-              <div style={{ font: "600 13px/1 var(--font-poppins)", fontFamily: "var(--font-poppins)", letterSpacing: "0.12em", textTransform: "uppercase" as never, color: "var(--lime-500)" }}>Depois</div>
-              <p style={{ font: "600 22px/1.45 var(--font-poppins)", fontFamily: "var(--font-poppins)", color: "var(--white)", margin: "16px 0 0" }}>
-                Uma presença digital que fecha por você — mesmo quando você não está disponível.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* VALORES */}
-        <section style={{ background: "var(--white)", padding: "88px 24px" }}>
-          <div style={{ maxWidth: 1180, margin: "0 auto" }}>
-            <div style={{ maxWidth: 620, margin: "0 auto", textAlign: "center" }}>
-              <span className="rd-eyebrow">Como trabalhamos</span>
-              <h2 style={{ font: "700 36px/1.15 var(--font-poppins)", fontFamily: "var(--font-poppins)", color: "var(--green-800)", letterSpacing: "-0.02em", margin: "20px 0 0" }}>
-                Os princípios que sustentam cada projeto
-              </h2>
-            </div>
-            <div className="sb-valores" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 22, marginTop: 48 }}>
-              {[
-                { title: "Prazo combinado é prazo cumprido", desc: "Sites em 10 a 20 dias úteis, design em 5 a 7. Sem desculpa, sem surpresa. Respeitamos o seu tempo porque ele vale dinheiro." },
-                { title: "Especialistas em profissional liberal", desc: "Não atendemos qualquer negócio. Entendemos como transmitir autoridade para quem vive de expertise — credenciais, serviços e confiança." },
-                { title: "Design exclusivo, nunca template", desc: "Cada projeto começa do zero, a partir de um briefing da sua profissão e posicionamento. Sua identidade não vai se parecer com a de ninguém." },
-                { title: "Você fala direto com quem produz", desc: "Sem gerente intermediário, sem atendimento robotizado. Via WhatsApp, com resposta em horas e atualizações proativas durante o projeto." },
-              ].map(({ title, desc }) => (
-                <div key={title} className="sb-valor" style={{ background: "var(--neutral-100)", borderRadius: "var(--radius-lg)", padding: 32 }}>
-                  <h3 style={{ font: "700 20px/1.3 var(--font-poppins)", fontFamily: "var(--font-poppins)", color: "var(--green-800)", margin: "0 0 10px" }}>{title}</h3>
-                  <p style={{ font: "var(--text-base)", fontFamily: "var(--font-poppins)", color: "var(--text-body)", margin: 0 }}>{desc}</p>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                  {s.body.map((p, j) => (
+                    <p key={j} style={{ fontFamily: "var(--font-sans)", fontSize: "1.05rem", lineHeight: 1.78, color: "#4A4A4A" }}>
+                      {p}
+                    </p>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ALCANCE */}
-        <section style={{ background: "var(--green-800)", color: "var(--white)", padding: "72px 24px" }}>
-          <div className="sb-stats" style={{ maxWidth: 1080, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24, textAlign: "center" as never }}>
-            {[
-              { fig: "100%", label: "online · todo o Brasil" },
-              { fig: "SP·RJ·MG·PR", label: "profissionais já atendidos" },
-              { fig: "10–20", label: "dias úteis por site" },
-              { fig: "R$197", label: "manutenção mensal opcional" },
-            ].map(({ fig, label }) => (
-              <div key={label} className="sb-stat">
-                <div style={{ font: "700 42px/1 var(--font-poppins)", fontFamily: "var(--font-poppins)", color: "var(--lime-500)", letterSpacing: "-0.02em" }}>{fig}</div>
-                <div style={{ font: "var(--text-sm)", fontFamily: "var(--font-poppins)", color: "var(--green-200)", marginTop: 8 }}>{label}</div>
-              </div>
+              </motion.article>
             ))}
-          </div>
-        </section>
 
-        {/* CTA */}
-        <section style={{ background: "var(--lime-500)", padding: "74px 24px" }}>
-          <div className="sb-cta" style={{ maxWidth: 820, margin: "0 auto", textAlign: "center" }}>
-            <h2 style={{ font: "700 38px/1.13 var(--font-poppins)", fontFamily: "var(--font-poppins)", color: "var(--green-800)", letterSpacing: "-0.02em", margin: 0 }}>
-              Vamos colocar sua imagem digital à altura do seu trabalho?
-            </h2>
-            <Link href="/contato" style={{ display: "inline-flex", alignItems: "center", gap: 10, marginTop: 28, background: "var(--green-800)", color: "var(--white)", font: "600 17px/1 var(--font-poppins)", fontFamily: "var(--font-poppins)", padding: "17px 32px", borderRadius: "var(--radius-pill)", boxShadow: "var(--shadow-md)" }}>
-              <span style={{ width: 9, height: 9, borderRadius: "50%", background: "var(--lime-500)", boxShadow: "0 0 0 4px rgba(255,255,255,0.25)", display: "inline-block" }} />
-              Solicitar proposta gratuita →
-            </Link>
+            <div style={{ paddingTop: "4rem", display: "flex", gap: "2rem", flexWrap: "wrap" }}>
+              <Link
+                href="/contato"
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.85rem",
+                  fontWeight: 500,
+                  color: "#F5F1E8",
+                  background: "#1B2D4F",
+                  padding: "1rem 2rem",
+                  display: "inline-block",
+                  letterSpacing: "0.04em",
+                  transition: "opacity 0.2s ease",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+              >
+                Solicitar proposta →
+              </Link>
+              <Link
+                href="/manifesto"
+                className="link-mustard"
+                style={{ fontFamily: "var(--font-sans)", fontSize: "0.85rem", color: "#1B2D4F", display: "inline-flex", alignItems: "center", letterSpacing: "0.04em" }}
+              >
+                Ler o manifesto →
+              </Link>
+            </div>
           </div>
         </section>
       </main>
+
       <Footer />
+
+      <style>{`
+        @media (max-width: 768px) {
+          .sobre-row { grid-template-columns: 1fr !important; gap: 2rem !important; }
+        }
+      `}</style>
     </>
   );
 }

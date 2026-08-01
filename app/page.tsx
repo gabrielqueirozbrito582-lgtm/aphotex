@@ -1,576 +1,634 @@
 "use client";
 
-import { useEffect } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    gsap: any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ScrollTrigger: any;
-  }
-}
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+};
 
-function waitGSAP(): Promise<void> {
-  return new Promise((res) => {
-    const t = setInterval(() => {
-      if (typeof window !== "undefined" && window.gsap && window.ScrollTrigger) {
-        clearInterval(t);
-        res();
-      }
-    }, 40);
-  });
-}
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1 } },
+};
 
-const stats = [
-  { value: "10–20", label: "dias úteis para o site no ar" },
-  { value: "5–7",   label: "dias para entregar design" },
-  { value: "2h",    label: "para receber a proposta" },
-  { value: "100%",  label: "online · todo o Brasil" },
-];
-
-const problems = [
-  "Cobro R$ 300 por consulta, mas meu Instagram parece de estudante.",
-  "Meus clientes chegam por indicação. Mas quando pesquisam meu nome… não acham nada confiável.",
-  "Meu concorrente é profissionalmente inferior. Mas tem um site melhor — e está crescendo mais.",
-  "Já tentei freelancer. Atrasou, ficou genérico, não entendeu o meu negócio.",
-];
-
-const diferenciais = [
+const principles = [
   {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-      </svg>
-    ),
-    title: "Entrega em dias, não em meses",
-    body: "Sites prontos em 10 a 20 dias úteis. Design em 5 a 7 dias. Prazo combinado é prazo cumprido — sem desculpa, sem surpresa.",
+    n: "01",
+    title: "Design exclusivo em cada projeto",
+    body: "Nenhum template, nenhum atalho. Cada site é criado do zero com conceito visual único, tipografia pensada e estrutura construída para o seu perfil específico.",
   },
   {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" />
-      </svg>
-    ),
-    title: "Especialistas em profissional liberal",
+    n: "02",
+    title: "Especialização em profissionais liberais",
     body: "Não atendemos qualquer negócio. Entendemos como transmitir autoridade para quem vive de expertise — credenciais, serviços, confiança.",
   },
   {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2L12 3z" />
-      </svg>
-    ),
-    title: "Design exclusivo, nunca template",
-    body: "Cada projeto é criado do zero. Sua identidade visual não vai se parecer com a de ninguém. Zero atalho, zero cara genérica.",
+    n: "03",
+    title: "Presença digital estratégica, não decoração",
+    body: "Um site bonito que não converte é decoração cara. Cada decisão de design tem intenção: captar atenção, construir confiança, gerar contato.",
   },
   {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z" />
-      </svg>
-    ),
-    title: "Você fala direto com quem produz",
-    body: "Sem gerente intermediário, sem atendimento robotizado. Via WhatsApp, com resposta em horas e atualizações proativas durante o projeto.",
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" />
-      </svg>
-    ),
-    title: "Qualidade com preço justo",
-    body: "Agências cobram R$ 8.000 a R$ 15.000 pelo mesmo nível de resultado. Aqui você paga entre R$ 1.497 e R$ 4.997 — com qualidade que compete.",
+    n: "04",
+    title: "Suporte direto com quem cria",
+    body: "Sem gerente intermediário. Você fala via WhatsApp com quem está criando seu projeto — resposta em horas, atualizações proativas.",
   },
 ];
 
-const testimonials = [
-  {
-    initials: "CM", name: "Carolina M.", role: "Psicóloga clínica · São Paulo/SP",
-    quote: "\"Eu tinha vergonha de mandar meu site pra potenciais clientes. Depois da Aphotex, passei a usar o site como cartão de visita. Em três semanas, fechei dois contratos novos — ambos vieram pelo site.\"",
-  },
-  {
-    initials: "RT", name: "Rodrigo T.", role: "Consultor financeiro · Curitiba/PR",
-    quote: "\"Contratei um freelancer antes e foi uma decepção. Com a Aphotex foi diferente: prazo cumprido, design que combinou com o que eu transmito nos atendimentos. Profissionalismo do início ao fim.\"",
-  },
-  {
-    initials: "AF", name: "Ana F.", role: "Nutricionista · Belo Horizonte/MG",
-    quote: "\"O que mais me surpreendeu foi a velocidade. Achei que ia demorar dois meses — ficou pronto em 15 dias. E o resultado ficou melhor do que eu esperava. Meus colegas ficaram perguntando quem fez.\"",
-  },
+const stats = [
+  { value: "10", label: "dias úteis do briefing ao site no ar" },
+  { value: "5–7", label: "dias para entregar design finalizado" },
+  { value: "2h", label: "tempo médio para receber a proposta" },
+  { value: "100%", label: "online · atendimento em todo o Brasil" },
 ];
-
-/* ── shared inline style helpers ── */
-const ff = "var(--font-poppins)";
 
 export default function Home() {
-  useEffect(() => {
-    let ctx: { revert: () => void } | null = null;
-
-    waitGSAP().then(() => {
-      const { gsap, ScrollTrigger } = window;
-      gsap.registerPlugin(ScrollTrigger);
-
-      ctx = gsap.context(() => {
-        /* hero — stagger children */
-        gsap.from(".hero-content > *", {
-          opacity: 0, y: 30, duration: 0.7, ease: "power3.out",
-          stagger: 0.12, delay: 0.15,
-        });
-        gsap.from(".hero-image", {
-          opacity: 0, x: 40, duration: 0.9, ease: "power3.out", delay: 0.3,
-        });
-        gsap.from(".hero-badge-bottom", {
-          opacity: 0, x: -20, duration: 0.7, ease: "back.out(1.4)", delay: 0.7,
-        });
-        gsap.from(".hero-badge-top", {
-          opacity: 0, x: 20, duration: 0.7, ease: "back.out(1.4)", delay: 0.85,
-        });
-
-        /* trust band */
-        gsap.from(".stat-item", {
-          opacity: 0, y: 24, duration: 0.6, ease: "power2.out",
-          stagger: 0.1,
-          scrollTrigger: { trigger: ".trust-band", start: "top 88%" },
-        });
-
-        /* section reveals */
-        (gsap.utils.toArray(".reveal") as HTMLElement[]).forEach((el) => {
-          gsap.from(el, {
-            opacity: 0, y: 36, duration: 0.7, ease: "power2.out",
-            scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" },
-          });
-        });
-
-        /* problem cards */
-        gsap.from(".problem-card", {
-          opacity: 0, y: 28, duration: 0.6, ease: "power2.out", stagger: 0.1,
-          scrollTrigger: { trigger: ".problem-grid", start: "top 85%" },
-        });
-
-        /* diferencial cards */
-        gsap.from(".dif-card", {
-          opacity: 0, y: 28, scale: 0.97, duration: 0.55, ease: "power2.out", stagger: 0.09,
-          scrollTrigger: { trigger: ".dif-grid", start: "top 82%" },
-        });
-
-        /* testimonial cards */
-        gsap.from(".testi-card", {
-          opacity: 0, y: 28, duration: 0.6, ease: "power2.out", stagger: 0.12,
-          scrollTrigger: { trigger: ".testi-grid", start: "top 85%" },
-        });
-
-        /* CTA final */
-        gsap.from(".cta-final > *", {
-          opacity: 0, y: 24, duration: 0.65, ease: "power2.out", stagger: 0.1,
-          scrollTrigger: { trigger: ".cta-final", start: "top 85%" },
-        });
-
-        /* hover lift on cards */
-        document.querySelectorAll<HTMLElement>(".card-hover").forEach((card) => {
-          card.addEventListener("mouseenter", () =>
-            gsap.to(card, { y: -4, boxShadow: "0 12px 32px rgba(14,42,30,0.12)", duration: 0.25, ease: "power2.out" })
-          );
-          card.addEventListener("mouseleave", () =>
-            gsap.to(card, { y: 0, boxShadow: "0 2px 8px rgba(14,42,30,0.06)", duration: 0.25, ease: "power2.out" })
-          );
-        });
-      });
-    });
-
-    return () => ctx?.revert();
-  }, []);
-
   return (
     <>
       <Nav />
 
       <main>
-        {/* ── HERO ──────────────────────────────────────────── */}
-        <section style={{ background: "var(--white)", padding: "72px 24px 40px" }}>
-          <div style={{
-            maxWidth: "var(--container)", margin: "0 auto",
-            display: "grid", gridTemplateColumns: "1.05fr 0.95fr",
-            gap: 56, alignItems: "center",
-          }}>
-            {/* left */}
-            <div className="hero-content" style={{ display: "flex", flexDirection: "column" }}>
-              <span className="rd-eyebrow">Sites &amp; design para profissionais liberais</span>
-              <h1 style={{
-                font: `700 54px/1.08 ${ff}`, fontFamily: ff,
-                color: "var(--green-800)", letterSpacing: "-0.02em",
-                margin: "22px 0 0", textWrap: "balance" as never,
-              }}>
-                Sua competência é real.<br />
-                Sua imagem digital precisa{" "}
-                <span className="rd-mark">dizer isso.</span>
-              </h1>
-              <p style={{
-                font: "var(--text-lg)", fontFamily: ff,
-                color: "var(--text-body)", maxWidth: 520, margin: "24px 0 0",
-              }}>
-                A Aphotex cria sites e design visual para profissionais que vivem da própria expertise — terapeutas, advogados, coaches, nutricionistas e consultores que cobram pelo que sabem, mas ainda não têm uma presença digital à altura do que entregam.
-              </p>
-              <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap", marginTop: 34 }}>
+        {/* ── HERO ────────────────────────────────────────────── */}
+        <section
+          style={{
+            background: "#F5F1E8",
+            minHeight: "85vh",
+            display: "flex",
+            alignItems: "center",
+            padding: "5rem 2rem 4rem",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: 1280,
+              margin: "0 auto",
+              width: "100%",
+              display: "grid",
+              gridTemplateColumns: "3fr 2fr",
+              gap: "4rem",
+              alignItems: "center",
+            }}
+            className="hero-grid"
+          >
+            {/* Esquerda */}
+            <motion.div
+              variants={stagger}
+              initial="hidden"
+              animate="show"
+              style={{ display: "flex", flexDirection: "column" }}
+            >
+              <motion.p
+                variants={fadeUp}
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.68rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: "#D4A73C",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                APHOTEX — EDIÇÃO 01 · 2026
+              </motion.p>
+
+              <motion.h1
+                variants={fadeUp}
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  fontSize: "clamp(3rem, 7vw, 6rem)",
+                  fontWeight: 400,
+                  lineHeight: 1.05,
+                  color: "#1B2D4F",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                Sua competência é real.
+                <br />
+                Sua imagem digital precisa dizer isso.
+              </motion.h1>
+
+              <motion.p
+                variants={fadeUp}
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "1.05rem",
+                  lineHeight: 1.7,
+                  color: "#4A4A4A",
+                  maxWidth: 520,
+                  marginBottom: "2.5rem",
+                }}
+              >
+                A Aphotex cria sites e design visual para profissionais que vivem da própria
+                expertise — terapeutas, advogados, coaches, nutricionistas e consultores que
+                cobram pelo que sabem, mas ainda não têm uma presença digital à altura do que entregam.
+              </motion.p>
+
+              <motion.div variants={fadeUp} style={{ display: "flex", alignItems: "center", gap: "2rem", flexWrap: "wrap" }}>
                 <Link
                   href="/contato"
                   style={{
-                    display: "inline-flex", alignItems: "center", gap: 10,
-                    background: "var(--green-800)", color: "var(--white)",
-                    font: `600 17px/1 ${ff}`, fontFamily: ff,
-                    padding: "16px 28px", borderRadius: "var(--radius-pill)",
-                    transition: `background var(--dur-base) var(--ease-out)`,
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "0.85rem",
+                    fontWeight: 500,
+                    color: "#F5F1E8",
+                    background: "#1B2D4F",
+                    padding: "1rem 2rem",
+                    display: "inline-block",
+                    letterSpacing: "0.04em",
+                    transition: "opacity 0.2s ease",
                   }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "var(--green-700)")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "var(--green-800)")}
+                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
                 >
-                  <span style={{
-                    width: 9, height: 9, borderRadius: "50%",
-                    background: "var(--lime-500)",
-                    boxShadow: "0 0 0 4px rgba(205,234,69,0.25)",
-                  }} />
-                  Solicitar proposta gratuita →
+                  Solicitar proposta →
                 </Link>
+
                 <Link
                   href="/servicos"
+                  className="link-mustard"
                   style={{
-                    display: "inline-flex", alignItems: "center",
-                    font: `600 16px/1 ${ff}`, fontFamily: ff,
-                    color: "var(--green-800)", padding: "16px 8px",
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "0.85rem",
+                    color: "#1B2D4F",
+                    letterSpacing: "0.04em",
                   }}
                 >
                   Ver pacotes e preços
                 </Link>
-              </div>
-            </div>
+              </motion.div>
 
-            {/* right — image placeholder */}
-            <div className="hero-image" style={{ position: "relative" }}>
-              <div style={{
-                width: "100%", height: 460,
-                background: "var(--neutral-100)",
-                borderRadius: 22,
-                boxShadow: "var(--shadow-lg)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                color: "var(--neutral-300)",
-                font: `500 14px/1 ${ff}`, fontFamily: ff,
-              }}>
-                Foto de um profissional
-              </div>
+              <motion.p
+                variants={fadeUp}
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.65rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  color: "#D4A73C",
+                  marginTop: "2rem",
+                  borderTop: "1px solid #E5DFCF",
+                  paddingTop: "1.25rem",
+                }}
+              >
+                VAGAS LIMITADAS · PREÇOS DE LANÇAMENTO
+              </motion.p>
+            </motion.div>
 
-              {/* badge bottom-left */}
-              <div className="hero-badge-bottom" style={{
-                position: "absolute", left: -22, bottom: 34,
-                display: "inline-flex", alignItems: "center", gap: 12,
-                background: "var(--lime-500)", color: "var(--green-800)",
-                borderRadius: "var(--radius-pill)", padding: "14px 22px",
-                boxShadow: "var(--shadow-md)",
-              }}>
-                <span style={{ font: `700 22px/1 ${ff}`, fontFamily: ff, letterSpacing: "-0.02em" }}>10 dias</span>
-                <span style={{ font: `500 12px/1.25 ${ff}`, fontFamily: ff, color: "var(--green-700)", maxWidth: 96 }}>
-                  do briefing ao site no ar
-                </span>
-              </div>
-
-              {/* badge top-right */}
-              <div className="hero-badge-top" style={{
-                position: "absolute", right: -16, top: 30,
-                display: "inline-flex", alignItems: "center", gap: 10,
-                background: "var(--white)", color: "var(--green-800)",
-                borderRadius: "var(--radius-pill)", padding: "11px 18px",
-                boxShadow: "var(--shadow-md)", border: "1px solid var(--neutral-200)",
-              }}>
-                <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--green-500)" }} />
-                <span style={{ font: `600 13px/1 ${ff}`, fontFamily: ff }}>Design exclusivo, nunca template</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Trust band */}
-          <div className="trust-band" style={{
-            maxWidth: "var(--container)", margin: "56px auto 0",
-            padding: "30px 24px",
-            background: "var(--neutral-100)", borderRadius: "var(--radius-lg)",
-            display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24,
-          }}>
-            {stats.map((s) => (
-              <div key={s.label} className="stat-item" style={{ textAlign: "center" }}>
-                <div className="rd-figure">{s.value}</div>
-                <div style={{ font: "var(--text-sm)", fontFamily: ff, color: "var(--text-muted)", marginTop: 6 }}>{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── PROBLEMA ──────────────────────────────────────── */}
-        <section style={{ background: "var(--neutral-100)", padding: "88px 24px" }}>
-          <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
-            <span className="rd-eyebrow reveal">O problema</span>
-            <h2 className="reveal" style={{
-              font: `700 38px/1.15 ${ff}`, fontFamily: ff,
-              color: "var(--green-800)", letterSpacing: "-0.02em",
-              margin: "20px 0 0", textWrap: "balance" as never,
-            }}>
-              Quando alguém pesquisa o seu nome no Google… o que encontra?
-            </h2>
-            <p className="reveal" style={{
-              font: "var(--text-lg)", fontFamily: ff,
-              color: "var(--text-body)", margin: "22px auto 0", maxWidth: 720,
-            }}>
-              Você tem anos de experiência. Clientes que confiam em você. Um serviço que transforma a vida de quem passa pela sua porta. Mas um site com cara de 2015 — ou nenhum site — fala antes de você. Em segundos, a pessoa já formou uma opinião.
-            </p>
-          </div>
-
-          <div className="problem-grid" style={{
-            maxWidth: 1080, margin: "48px auto 0",
-            display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 22,
-          }}>
-            {problems.map((p) => (
-              <div key={p} className="problem-card card-hover" style={{
-                background: "var(--white)",
-                border: "1px solid var(--neutral-200)",
-                borderLeft: "3px solid var(--lime-500)",
-                borderRadius: "var(--radius-lg)",
-                padding: 28, boxShadow: "var(--shadow-sm)",
-              }}>
-                <p style={{ font: `600 18px/1.5 ${ff}`, fontFamily: ff, color: "var(--green-800)", margin: 0 }}>
-                  &ldquo;{p}&rdquo;
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <p className="reveal" style={{
-            maxWidth: 760, margin: "40px auto 0",
-            textAlign: "center", font: "var(--text-lg)", fontFamily: ff,
-            color: "var(--text-body)",
-          }}>
-            Se alguma dessas frases soou familiar, o problema não é o seu trabalho. É a distância entre quem você é e o que a internet mostra sobre você — e essa distância tem um custo invisível toda semana.
-          </p>
-        </section>
-
-        {/* ── SOLUÇÃO (forest band) ─────────────────────────── */}
-        <section style={{ background: "var(--green-800)", color: "var(--white)", padding: "90px 24px" }}>
-          <div style={{ maxWidth: 1080, margin: "0 auto" }}>
-            <div style={{ maxWidth: 760 }}>
-              <span className="reveal" style={{
-                display: "inline-block",
-                font: `600 12px/1 ${ff}`, fontFamily: ff,
-                letterSpacing: "0.14em", textTransform: "uppercase",
-                color: "var(--lime-500)",
-                border: "1px solid rgba(205,234,69,0.4)",
-                borderRadius: "var(--radius-pill)", padding: "7px 14px",
-              }}>
-                A solução
+            {/* Direita — número editorial */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.4 }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                userSelect: "none",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  fontSize: "clamp(8rem, 18vw, 18rem)",
+                  fontWeight: 400,
+                  color: "#E5DFCF",
+                  lineHeight: 0.85,
+                }}
+              >
+                01
               </span>
-              <h2 className="reveal" style={{
-                font: `700 40px/1.13 ${ff}`, fontFamily: ff,
-                color: "var(--white)", letterSpacing: "-0.02em",
-                margin: "22px 0 0", textWrap: "balance" as never,
-              }}>
-                Presença digital com o mesmo nível da{" "}
-                <span className="rd-mark" style={{ color: "var(--green-900)" }}>autoridade</span>{" "}
-                que você já tem.
-              </h2>
-              <p className="reveal" style={{
-                font: "var(--text-lg)", fontFamily: ff,
-                color: "var(--green-200)", margin: "22px 0 0",
-              }}>
-                Não criamos "site bonito". Criamos presença digital estratégica — que transmite autoridade desde o primeiro segundo, converte visitantes em clientes e faz o seu nome aparecer como referência. Em dias, não em meses. Com design exclusivo. Por uma fração do custo de uma agência tradicional.
-              </p>
-            </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22, marginTop: 46 }}>
-              <div className="reveal" style={{
-                background: "rgba(255,255,255,0.05)",
-                border: "1px solid rgba(255,255,255,0.12)",
-                borderRadius: "var(--radius-lg)", padding: 30,
-              }}>
-                <div style={{ font: `600 13px/1 ${ff}`, fontFamily: ff, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--green-300)" }}>Antes</div>
-                <p style={{ font: `600 21px/1.45 ${ff}`, fontFamily: ff, color: "var(--white)", margin: "14px 0 0" }}>
-                  Clientes que hesitam porque a imagem online não convence.
-                </p>
-              </div>
-              <div className="reveal" style={{
-                background: "var(--lime-500)",
-                borderRadius: "var(--radius-lg)", padding: 30,
-              }}>
-                <div style={{ font: `600 13px/1 ${ff}`, fontFamily: ff, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--green-700)" }}>Depois</div>
-                <p style={{ font: `600 21px/1.45 ${ff}`, fontFamily: ff, color: "var(--green-800)", margin: "14px 0 0" }}>
-                  Uma presença digital que fecha por você — mesmo quando você não está disponível.
-                </p>
-              </div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
-        {/* ── DIFERENCIAIS ──────────────────────────────────── */}
-        <section style={{ background: "var(--white)", padding: "90px 24px" }}>
-          <div style={{ maxWidth: "var(--container)", margin: "0 auto" }}>
-            <div style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
-              <span className="rd-eyebrow reveal">Diferenciais</span>
-              <h2 className="reveal" style={{
-                font: `700 38px/1.15 ${ff}`, fontFamily: ff,
-                color: "var(--green-800)", letterSpacing: "-0.02em", margin: "20px 0 0",
-              }}>
-                Por que a Aphotex — e não qualquer designer ou agência?
-              </h2>
-            </div>
+        {/* ── MANIFESTO CURTO ─────────────────────────────────── */}
+        <section
+          style={{
+            background: "#1B2D4F",
+            minHeight: "70vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "7rem 2rem",
+            textAlign: "center",
+          }}
+        >
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={stagger}
+            style={{ maxWidth: 900 }}
+          >
+            <motion.h2
+              variants={fadeUp}
+              style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "clamp(2.4rem, 6vw, 5rem)",
+                fontWeight: 400,
+                lineHeight: 1.15,
+                color: "#F5F1E8",
+              }}
+            >
+              Não fazemos sites.
+              <br />
+              Fazemos a diferença entre ser encontrado — e ser lembrado.
+            </motion.h2>
 
-            <div className="dif-grid" style={{
-              display: "grid", gridTemplateColumns: "repeat(3,1fr)",
-              gap: 22, marginTop: 48,
-            }}>
-              {diferenciais.map((d) => (
-                <div key={d.title} className="dif-card card-hover" style={{
-                  background: "var(--white)",
-                  border: "1px solid var(--neutral-200)",
-                  borderRadius: "var(--radius-lg)", padding: 28,
-                  boxShadow: "var(--shadow-sm)",
-                }}>
-                  <span style={{
-                    display: "inline-flex", width: 46, height: 46,
-                    borderRadius: "var(--radius-md)",
-                    background: "var(--green-100)", color: "var(--green-700)",
-                    alignItems: "center", justifyContent: "center",
-                  }}>
-                    {d.icon}
-                  </span>
-                  <h3 style={{ font: `700 19px/1.3 ${ff}`, fontFamily: ff, color: "var(--green-800)", margin: "18px 0 8px" }}>
-                    {d.title}
-                  </h3>
-                  <p style={{ font: "var(--text-sm)", fontFamily: ff, color: "var(--text-body)", margin: 0 }}>
-                    {d.body}
-                  </p>
-                </div>
-              ))}
+            <motion.div
+              variants={fadeUp}
+              style={{
+                width: 60,
+                height: 1,
+                background: "#D4A73C",
+                margin: "3rem auto 0",
+              }}
+            />
+          </motion.div>
+        </section>
 
-              {/* CTA card */}
-              <div className="dif-card" style={{
-                background: "var(--green-800)",
-                borderRadius: "var(--radius-lg)", padding: 28,
-                display: "flex", flexDirection: "column", justifyContent: "center",
-                color: "var(--white)",
-              }}>
-                <h3 style={{ font: `700 21px/1.3 ${ff}`, fontFamily: ff, color: "var(--white)", margin: "0 0 14px" }}>
-                  Pronto para fechar por você?
-                </h3>
-                <Link
-                  href="/contato"
+        {/* ── FILOSOFIA ───────────────────────────────────────── */}
+        <section style={{ background: "#F5F1E8", padding: "8rem 2rem" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.65rem",
+                fontWeight: 500,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#4A4A4A",
+                marginBottom: "3rem",
+              }}
+            >
+              II. FILOSOFIA
+            </motion.p>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 2fr",
+                gap: "5rem",
+                alignItems: "start",
+              }}
+              className="two-col-grid"
+            >
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  fontSize: "clamp(2rem, 4vw, 3rem)",
+                  fontWeight: 400,
+                  lineHeight: 1.2,
+                  color: "#1B2D4F",
+                }}
+              >
+                Autoridade real merece presença real.
+              </motion.h2>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
+              >
+                <p style={{ fontFamily: "var(--font-sans)", fontSize: "1.05rem", lineHeight: 1.75, color: "#4A4A4A" }}>
+                  Você passou anos estudando, construindo reputação e refinando a sua prática. Cada consulta, cada processo, cada sessão acumulou conhecimento que não tem preço. Mas existe uma distância perigosa entre quem você é e o que aparece quando alguém pesquisa seu nome.
+                </p>
+
+                <blockquote
                   style={{
-                    display: "inline-flex", alignItems: "center", gap: 10,
-                    alignSelf: "flex-start",
-                    background: "var(--lime-500)", color: "var(--green-800)",
-                    font: `600 15px/1 ${ff}`, fontFamily: ff,
-                    padding: "13px 22px", borderRadius: "var(--radius-pill)",
+                    fontFamily: "var(--font-serif)",
+                    fontStyle: "italic",
+                    fontSize: "clamp(1.4rem, 3vw, 1.9rem)",
+                    lineHeight: 1.3,
+                    color: "#1B2D4F",
+                    borderLeft: "2px solid #D4A73C",
+                    paddingLeft: "1.5rem",
+                    margin: "1rem 0",
                   }}
                 >
-                  Solicitar proposta →
-                </Link>
-              </div>
+                  &ldquo;Cada cliente merece um site tão único quanto o serviço que oferece.&rdquo;
+                </blockquote>
+
+                <p style={{ fontFamily: "var(--font-sans)", fontSize: "1.05rem", lineHeight: 1.75, color: "#4A4A4A" }}>
+                  A Aphotex existe para fechar essa distância. Não com templates prontos ou soluções genéricas, mas com design criado para o seu perfil específico — capaz de transmitir, em segundos, o mesmo nível de autoridade que você construiu em anos.
+                </p>
+
+                <p style={{ fontFamily: "var(--font-sans)", fontSize: "1.05rem", lineHeight: 1.75, color: "#4A4A4A" }}>
+                  Porque no mundo digital, presença amadora tem custo. E esse custo é invisível — contabilizado em clientes que chegam, hesitam e vão embora silenciosamente.
+                </p>
+              </motion.div>
             </div>
           </div>
         </section>
 
-        {/* ── DEPOIMENTOS ───────────────────────────────────── */}
-        <section style={{ background: "var(--neutral-100)", padding: "90px 24px" }}>
-          <div style={{ maxWidth: "var(--container)", margin: "0 auto" }}>
-            <div style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
-              <span className="rd-eyebrow reveal">Depoimentos</span>
-              <h2 className="reveal" style={{
-                font: `700 38px/1.15 ${ff}`, fontFamily: ff,
-                color: "var(--green-800)", letterSpacing: "-0.02em", margin: "20px 0 0",
-              }}>
-                Quem já trocou a imagem amadora por presença de verdade
-              </h2>
+        {/* ── O QUE FAZEMOS ───────────────────────────────────── */}
+        <section style={{ background: "#F5F1E8", padding: "0 2rem 8rem" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+            <div style={{ borderTop: "1px solid #E5DFCF", paddingTop: "4rem", marginBottom: "3rem" }}>
+              <p
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.65rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  color: "#4A4A4A",
+                  marginBottom: "1rem",
+                }}
+              >
+                III. O QUE FAZEMOS
+              </p>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  fontSize: "clamp(2rem, 4vw, 3rem)",
+                  fontWeight: 400,
+                  color: "#1B2D4F",
+                }}
+              >
+                Quatro princípios inegociáveis
+              </motion.h2>
             </div>
 
-            <div className="testi-grid" style={{
-              display: "grid", gridTemplateColumns: "repeat(3,1fr)",
-              gap: 22, marginTop: 48,
-            }}>
-              {testimonials.map((t) => (
-                <div key={t.name} className="testi-card card-hover" style={{
-                  background: "var(--white)",
-                  border: "1px solid var(--neutral-200)",
-                  borderRadius: "var(--radius-lg)", padding: 30,
-                  boxShadow: "var(--shadow-sm)",
-                  display: "flex", flexDirection: "column", gap: 16,
-                }}>
-                  <div style={{ color: "var(--lime-600)", fontSize: 16, letterSpacing: 2 }}>★★★★★</div>
-                  <p style={{ font: `500 16px/1.6 ${ff}`, fontFamily: ff, color: "var(--neutral-700)", margin: 0, flex: 1 }}>
-                    {t.quote}
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              {principles.map((p, i) => (
+                <motion.div
+                  key={p.n}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.08 }}
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "120px 1fr 2fr",
+                    gap: "3rem",
+                    alignItems: "start",
+                    padding: "3rem 0",
+                    borderBottom: "1px solid #E5DFCF",
+                  }}
+                  className="principle-row"
+                >
+                  <span
+                    style={{
+                      fontFamily: "var(--font-serif)",
+                      fontSize: "clamp(3rem, 6vw, 5rem)",
+                      fontWeight: 400,
+                      color: "#E5DFCF",
+                      lineHeight: 1,
+                    }}
+                  >
+                    {p.n}
+                  </span>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-serif)",
+                      fontSize: "clamp(1.3rem, 2.5vw, 1.8rem)",
+                      fontWeight: 400,
+                      color: "#1B2D4F",
+                      lineHeight: 1.25,
+                      paddingTop: "0.5rem",
+                    }}
+                  >
+                    {p.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: "1rem",
+                      lineHeight: 1.7,
+                      color: "#4A4A4A",
+                      paddingTop: "0.5rem",
+                    }}
+                  >
+                    {p.body}
                   </p>
-                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                    <span style={{
-                      width: 44, height: 44, borderRadius: "50%",
-                      background: "var(--green-100)", color: "var(--green-700)",
-                      display: "inline-flex", alignItems: "center", justifyContent: "center",
-                      font: `700 16px/1 ${ff}`, fontFamily: ff,
-                    }}>
-                      {t.initials}
-                    </span>
-                    <div>
-                      <div style={{ font: `600 14px/1.2 ${ff}`, fontFamily: ff, color: "var(--green-800)" }}>{t.name}</div>
-                      <div style={{ font: "var(--text-xs)", fontFamily: ff, color: "var(--text-muted)" }}>{t.role}</div>
-                    </div>
-                  </div>
-                </div>
+                </motion.div>
               ))}
             </div>
-            <p style={{
-              textAlign: "center", font: "var(--text-xs)", fontFamily: ff,
-              color: "var(--text-muted)", margin: "24px 0 0",
-            }}>
-              Depoimentos ilustrativos para aprovação — serão substituídos por reais antes da publicação.
-            </p>
           </div>
         </section>
 
-        {/* ── CTA FINAL ─────────────────────────────────────── */}
-        <section style={{ background: "var(--lime-500)", padding: "80px 24px" }}>
-          <div className="cta-final" style={{ maxWidth: 880, margin: "0 auto", textAlign: "center" }}>
-            <h2 style={{
-              font: `700 42px/1.12 ${ff}`, fontFamily: ff,
-              color: "var(--green-800)", letterSpacing: "-0.02em",
-              margin: 0, textWrap: "balance" as never,
-            }}>
-              Sua imagem digital não pode esperar mais.
-            </h2>
-            <p style={{
-              font: "var(--text-lg)", fontFamily: ff,
-              color: "var(--green-700)", margin: "20px auto 0", maxWidth: 600,
-            }}>
-              Cada semana com presença amadora é uma semana de clientes que chegam — e vão embora sem fechar. Comece agora.
-            </p>
-            <Link
-              href="/contato"
+        {/* ── EM NÚMEROS ──────────────────────────────────────── */}
+        <section style={{ background: "#1B2D4F", padding: "7rem 2rem" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+            <p
               style={{
-                display: "inline-flex", alignItems: "center", gap: 10,
-                marginTop: 34,
-                background: "var(--green-800)", color: "var(--white)",
-                font: `600 17px/1 ${ff}`, fontFamily: ff,
-                padding: "17px 32px", borderRadius: "var(--radius-pill)",
-                boxShadow: "var(--shadow-md)",
-                transition: `background var(--dur-base) var(--ease-out)`,
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.65rem",
+                fontWeight: 500,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#D4A73C",
+                marginBottom: "4rem",
               }}
-              onMouseEnter={e => (e.currentTarget.style.background = "var(--green-700)")}
-              onMouseLeave={e => (e.currentTarget.style.background = "var(--green-800)")}
             >
-              <span style={{
-                width: 9, height: 9, borderRadius: "50%",
-                background: "var(--lime-500)",
-                boxShadow: "0 0 0 4px rgba(255,255,255,0.25)",
-              }} />
-              Solicitar proposta gratuita →
-            </Link>
+              IV. EM NÚMEROS
+            </p>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(4, 1fr)",
+                gap: "2rem",
+              }}
+              className="stats-grid"
+            >
+              {stats.map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.1 }}
+                >
+                  <div
+                    style={{
+                      fontFamily: "var(--font-serif)",
+                      fontSize: "clamp(3rem, 7vw, 7rem)",
+                      fontWeight: 400,
+                      color: "#F5F1E8",
+                      lineHeight: 1,
+                      marginBottom: "1rem",
+                    }}
+                  >
+                    {s.value}
+                  </div>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: "0.72rem",
+                      fontWeight: 500,
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      color: "rgba(245,241,232,0.5)",
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {s.label}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
+        </section>
+
+        {/* ── CONVITE PROCESSO ────────────────────────────────── */}
+        <section style={{ background: "#F5F1E8", padding: "5rem 2rem", borderBottom: "1px solid #E5DFCF" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1.5rem" }}>
+            <motion.h2
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "clamp(1.5rem, 3vw, 2.4rem)",
+                fontWeight: 400,
+                color: "#1B2D4F",
+              }}
+            >
+              Curioso sobre como trabalhamos?
+            </motion.h2>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+            >
+              <Link
+                href="/processo"
+                className="link-mustard"
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.85rem",
+                  fontWeight: 500,
+                  color: "#D4A73C",
+                  letterSpacing: "0.04em",
+                  transition: "opacity 0.2s",
+                }}
+              >
+                Conheça nosso processo →
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ── CTA FINAL ───────────────────────────────────────── */}
+        <section
+          style={{
+            background: "#D4A73C",
+            padding: "8rem 2rem",
+            textAlign: "center",
+          }}
+        >
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={stagger}
+            style={{ maxWidth: 800, margin: "0 auto" }}
+          >
+            <motion.h2
+              variants={fadeUp}
+              style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
+                fontWeight: 400,
+                lineHeight: 1.1,
+                color: "#1B2D4F",
+                marginBottom: "1.25rem",
+              }}
+            >
+              Sua imagem digital não pode esperar.
+            </motion.h2>
+
+            <motion.p
+              variants={fadeUp}
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "1.05rem",
+                lineHeight: 1.65,
+                color: "#1B2D4F",
+                marginBottom: "0.75rem",
+              }}
+            >
+              Cada semana com presença amadora tem custo. Comece agora.
+            </motion.p>
+
+            <motion.p
+              variants={fadeUp}
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.65rem",
+                fontWeight: 500,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#1B2D4F",
+                opacity: 0.7,
+                marginBottom: "2.5rem",
+              }}
+            >
+              PREÇOS DE LANÇAMENTO — VAGAS LIMITADAS
+            </motion.p>
+
+            <motion.div variants={fadeUp}>
+              <Link
+                href="/contato"
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.85rem",
+                  fontWeight: 500,
+                  color: "#F5F1E8",
+                  background: "#1B2D4F",
+                  padding: "1.1rem 2.5rem",
+                  display: "inline-block",
+                  letterSpacing: "0.04em",
+                  transition: "opacity 0.2s ease",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+              >
+                Solicitar proposta →
+              </Link>
+            </motion.div>
+          </motion.div>
         </section>
       </main>
 
       <Footer />
+
+      <style>{`
+        @media (max-width: 768px) {
+          .hero-grid { grid-template-columns: 1fr !important; }
+          .hero-grid > div:last-child { display: none !important; }
+          .two-col-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+          .principle-row { grid-template-columns: 60px 1fr !important; gap: 1.5rem !important; }
+          .principle-row > p { grid-column: 1 / -1 !important; }
+          .stats-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (max-width: 480px) {
+          .stats-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </>
   );
 }
