@@ -325,6 +325,27 @@ export default function Home() {
                 <p style={{ fontFamily: "var(--font-sans)", fontSize: "1.05rem", lineHeight: 1.75, color: "#4A4A4A" }}>
                   Porque no mundo digital, presença amadora tem custo. E esse custo é invisível — contabilizado em clientes que chegam, hesitam e vão embora silenciosamente.
                 </p>
+
+                <div
+                  style={{
+                    marginTop: "1rem",
+                    border: "1px solid #E5DFCF",
+                    overflow: "hidden",
+                  }}
+                >
+                  <img
+                    src="/images/filosofia-editorial.jpg"
+                    alt="Detalhe editorial de espaço de trabalho"
+                    style={{
+                      width: "100%",
+                      height: 260,
+                      objectFit: "cover",
+                      objectPosition: "center",
+                      display: "block",
+                      filter: "saturate(0.82) contrast(1.02)",
+                    }}
+                  />
+                </div>
               </motion.div>
             </div>
           </div>
@@ -362,6 +383,32 @@ export default function Home() {
                 Quatro princípios inegociáveis
               </motion.h2>
             </div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              style={{
+                borderTop: "1px solid #E5DFCF",
+                borderBottom: "1px solid #E5DFCF",
+                overflow: "hidden",
+                marginBottom: "0",
+              }}
+            >
+              <img
+                src="/images/o-que-fazemos-divisor.jpg"
+                alt="Textura editorial"
+                style={{
+                  width: "100%",
+                  height: 320,
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  display: "block",
+                  filter: "saturate(0.78) contrast(1.04)",
+                }}
+              />
+            </motion.div>
 
             <div style={{ display: "flex", flexDirection: "column" }}>
               {principles.map((p, i) => (
@@ -485,6 +532,176 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── TRABALHOS ───────────────────────────────────────── */}
+        <section style={{ background: "#F5F1E8", padding: "7rem 2rem" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <p
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.65rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
+                  color: "#4A4A4A",
+                  marginBottom: "1rem",
+                }}
+              >
+                TRABALHOS
+              </p>
+              <h2
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  fontSize: "clamp(2.2rem, 5vw, 4rem)",
+                  fontWeight: 400,
+                  color: "#1B2D4F",
+                  marginBottom: "1rem",
+                }}
+              >
+                Alguns projetos entregues
+              </h2>
+              <p
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  fontStyle: "italic",
+                  fontSize: "clamp(1rem, 1.8vw, 1.2rem)",
+                  color: "#4A4A4A",
+                  marginBottom: "4rem",
+                  maxWidth: 600,
+                }}
+              >
+                Cada site é único. Cada projeto é feito para transmitir a autoridade real de quem contratou.
+              </p>
+            </motion.div>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(2, 1fr)",
+                gap: "3rem",
+              }}
+              className="portfolio-grid"
+            >
+              {[
+                {
+                  href: "https://rafaella-leah.vercel.app/",
+                  img: "/portfolio/rafaella-leah-hero.jpg",
+                  nicho: "PROJETO · SAÚDE & BEM-ESTAR",
+                  nome: "Rafaella Leah",
+                  desc: "Fisioterapia domiciliar e Pilates individual online. Site com identidade acolhedora, foco em conversão via WhatsApp e narrativa emocional.",
+                },
+                {
+                  href: "https://www.terapeutareginafernandes.com.br/",
+                  img: "/portfolio/regina-fernandes-hero.jpg",
+                  nicho: "PROJETO · SAÚDE MENTAL",
+                  nome: "Regina Fernandes",
+                  desc: "Terapeuta certificada em TRG e Psicanalista. Site com posicionamento premium, storytelling profundo e agendamento via WhatsApp.",
+                },
+              ].map((p, i) => (
+                <motion.div
+                  key={p.nome}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.65, delay: i * 0.1 }}
+                >
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ display: "block", textDecoration: "none" }}
+                  >
+                    <div
+                      style={{
+                        aspectRatio: "16 / 10",
+                        overflow: "hidden",
+                        border: "1px solid #E5DFCF",
+                        marginBottom: "1.5rem",
+                        position: "relative",
+                      }}
+                    >
+                      <img
+                        src={p.img}
+                        alt={`Screenshot do site de ${p.nome}`}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          objectPosition: "top",
+                          display: "block",
+                          filter: "saturate(0.9)",
+                          transition: "opacity 0.3s ease",
+                        }}
+                        onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.92")}
+                        onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+                      />
+                    </div>
+                  </a>
+
+                  <p
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: "0.62rem",
+                      fontWeight: 500,
+                      letterSpacing: "0.2em",
+                      textTransform: "uppercase",
+                      color: "#4A4A4A",
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    {p.nicho}
+                  </p>
+
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-serif)",
+                      fontSize: "clamp(1.4rem, 2.5vw, 2rem)",
+                      fontWeight: 400,
+                      color: "#1B2D4F",
+                      marginBottom: "0.75rem",
+                    }}
+                  >
+                    {p.nome}
+                  </h3>
+
+                  <p
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: "0.95rem",
+                      lineHeight: 1.65,
+                      color: "#4A4A4A",
+                      marginBottom: "1rem",
+                    }}
+                  >
+                    {p.desc}
+                  </p>
+
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-mustard"
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: "0.82rem",
+                      fontWeight: 500,
+                      color: "#D4A73C",
+                      letterSpacing: "0.04em",
+                    }}
+                  >
+                    Visitar site →
+                  </a>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ── CONVITE PROCESSO ────────────────────────────────── */}
         <section style={{ background: "#F5F1E8", padding: "5rem 2rem", borderBottom: "1px solid #E5DFCF" }}>
           <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1.5rem" }}>
@@ -597,6 +814,7 @@ export default function Home() {
 
       <style>{`
         @media (max-width: 768px) {
+          .portfolio-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
           .two-col-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
           .principle-row { grid-template-columns: 60px 1fr !important; gap: 1.5rem !important; }
           .principle-row > p { grid-column: 1 / -1 !important; }

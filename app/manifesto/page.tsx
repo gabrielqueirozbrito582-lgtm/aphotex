@@ -85,6 +85,40 @@ export default function ManifestoPage() {
             </motion.h1>
 
             <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              style={{ marginBottom: "3rem" }}
+            >
+              <div style={{ border: "1px solid #E5DFCF", overflow: "hidden" }}>
+                <img
+                  src="/images/manifesto-editorial.jpg"
+                  alt="Imagem editorial — Aphotex Design"
+                  style={{
+                    width: "100%",
+                    height: "clamp(280px, 40vw, 480px)",
+                    objectFit: "cover",
+                    objectPosition: "center",
+                    display: "block",
+                    filter: "saturate(0.8) contrast(1.03)",
+                  }}
+                />
+              </div>
+              <p
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  fontStyle: "italic",
+                  fontSize: "0.78rem",
+                  color: "#4A4A4A",
+                  marginTop: "0.75rem",
+                  opacity: 0.7,
+                }}
+              >
+                Fotografia editorial · Aphotex Design
+              </p>
+            </motion.div>
+
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
