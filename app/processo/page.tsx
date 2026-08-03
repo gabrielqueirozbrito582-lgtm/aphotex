@@ -212,7 +212,7 @@ export default function ProcessoPage() {
                 onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
                 onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
               >
-                Solicitar proposta →
+                Iniciar meu projeto →
               </Link>
             </motion.div>
           </div>

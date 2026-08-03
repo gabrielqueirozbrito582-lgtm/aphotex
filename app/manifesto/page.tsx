@@ -236,7 +236,7 @@ export default function ManifestoPage() {
                     letterSpacing: "0.04em",
                   }}
                 >
-                  Ver nossos serviços →
+                  Conhecer os serviços →
                 </Link>
               </div>
             </motion.div>

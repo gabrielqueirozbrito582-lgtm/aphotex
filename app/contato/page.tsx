@@ -112,7 +112,7 @@ export default function ContatoPage() {
                 marginBottom: "4rem",
               }}
             >
-              PREÇOS DE LANÇAMENTO — VAGAS LIMITADAS
+              PREÇOS DA EDIÇÃO 01 · VÁLIDO ATÉ 31 DE MARÇO DE 2027
             </motion.p>
           </div>
         </section>

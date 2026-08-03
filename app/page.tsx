@@ -57,68 +57,122 @@ export default function Home() {
         <section
           style={{
             background: "#F5F1E8",
-            minHeight: "85vh",
+            minHeight: "80vh",
             display: "flex",
             alignItems: "center",
-            padding: "5rem 2rem 4rem",
+            padding: "8rem 2rem 6rem",
           }}
         >
-          <div
-            style={{
-              maxWidth: 900,
-              margin: "0 auto",
-              width: "100%",
-            }}
-            >
-            {/* Esquerda */}
+          <div style={{ maxWidth: 1100, margin: "0 auto", width: "100%" }}>
             <motion.div
               variants={stagger}
               initial="hidden"
               animate="show"
               style={{ display: "flex", flexDirection: "column" }}
             >
-              <motion.h1
-                variants={fadeUp}
-                style={{
-                  fontFamily: "var(--font-serif)",
-                  fontSize: "clamp(3rem, 7vw, 6rem)",
-                  fontWeight: 400,
-                  lineHeight: 1.05,
-                  color: "#1B2D4F",
-                  marginBottom: "1.5rem",
-                }}
-              >
-                Sua competência é real.
-                <br />
-                Sua imagem digital precisa dizer isso.
-              </motion.h1>
-
+              {/* Camada 1 — Micro-info identidade */}
               <motion.p
                 variants={fadeUp}
                 style={{
                   fontFamily: "var(--font-sans)",
-                  fontSize: "1.05rem",
-                  lineHeight: 1.7,
+                  fontSize: "0.65rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
                   color: "#4A4A4A",
-                  maxWidth: 520,
                   marginBottom: "2.5rem",
                 }}
               >
-                A Aphotex cria sites e design visual para profissionais que vivem da própria
-                expertise — terapeutas, advogados, coaches, nutricionistas e consultores que
-                cobram pelo que sabem, mas ainda não têm uma presença digital à altura do que entregam.
+                APHOTEX — ESTÚDIO DE DESIGN DIGITAL
               </motion.p>
 
-              <motion.div variants={fadeUp} style={{ display: "flex", alignItems: "center", gap: "2rem", flexWrap: "wrap" }}>
+              {/* Camada 2 — Título editorial */}
+              <motion.h1
+                variants={fadeUp}
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  fontSize: "clamp(3rem, 7.5vw, 6.5rem)",
+                  fontWeight: 400,
+                  lineHeight: 1.05,
+                  color: "#1B2D4F",
+                  marginBottom: "2.5rem",
+                  maxWidth: 900,
+                }}
+              >
+                Construímos a presença digital de profissionais liberais que vivem da expertise.
+              </motion.h1>
+
+              {/* Camada 3 — Subheadline funcional */}
+              <motion.p
+                variants={fadeUp}
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "1.1rem",
+                  lineHeight: 1.7,
+                  color: "#0F0F0F",
+                  maxWidth: 640,
+                  marginBottom: "3rem",
+                }}
+              >
+                Sites, identidade visual e design gráfico para psicólogos, advogados, coaches,
+                nutricionistas e outros especialistas que precisam ser levados a sério online.
+              </motion.p>
+
+              {/* Camada 4 — Posicionamento com traço mostarda */}
+              <motion.div
+                variants={fadeUp}
+                style={{
+                  display: "flex",
+                  gap: "1.5rem",
+                  alignItems: "flex-start",
+                  marginBottom: "3.5rem",
+                }}
+              >
+                <div
+                  style={{
+                    width: 40,
+                    height: 2,
+                    background: "#D4A73C",
+                    flexShrink: 0,
+                    marginTop: "0.75rem",
+                  }}
+                />
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
+                  {[
+                    "Design exclusivo, nunca template.",
+                    "Estratégia antes de estética.",
+                    "Prazo fixo, sem enrolação.",
+                  ].map((frase) => (
+                    <p
+                      key={frase}
+                      style={{
+                        fontFamily: "var(--font-serif)",
+                        fontStyle: "italic",
+                        fontSize: "clamp(1rem, 1.8vw, 1.2rem)",
+                        color: "#4A4A4A",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {frase}
+                    </p>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Camada 5 — CTAs editoriais */}
+              <motion.div
+                variants={fadeUp}
+                style={{ display: "flex", alignItems: "center", gap: "2.5rem", flexWrap: "wrap" }}
+              >
                 <Link
-                  href="/contato"
+                  href="/servicos"
                   style={{
                     fontFamily: "var(--font-sans)",
                     fontSize: "0.85rem",
                     fontWeight: 500,
                     color: "#F5F1E8",
                     background: "#1B2D4F",
-                    padding: "1rem 2rem",
+                    padding: "1rem 2.25rem",
                     display: "inline-block",
                     letterSpacing: "0.04em",
                     transition: "opacity 0.2s ease",
@@ -126,11 +180,11 @@ export default function Home() {
                   onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
                   onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
                 >
-                  Solicitar proposta →
+                  Ver o que criamos
                 </Link>
 
                 <Link
-                  href="/servicos"
+                  href="/manifesto"
                   className="link-mustard"
                   style={{
                     fontFamily: "var(--font-sans)",
@@ -139,28 +193,10 @@ export default function Home() {
                     letterSpacing: "0.04em",
                   }}
                 >
-                  Ver pacotes e preços
+                  Conheça a filosofia →
                 </Link>
               </motion.div>
-
-              <motion.p
-                variants={fadeUp}
-                style={{
-                  fontFamily: "var(--font-sans)",
-                  fontSize: "0.65rem",
-                  fontWeight: 500,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "#D4A73C",
-                  marginTop: "2rem",
-                  borderTop: "1px solid #E5DFCF",
-                  paddingTop: "1.25rem",
-                }}
-              >
-                PREÇOS DA EDIÇÃO 01 · VÁLIDO ATÉ 31 DE MARÇO DE 2027
-              </motion.p>
             </motion.div>
-
           </div>
         </section>
 
@@ -532,40 +568,25 @@ export default function Home() {
               Cada semana com presença amadora tem custo. Comece agora.
             </motion.p>
 
-            <motion.p
-              variants={fadeUp}
-              style={{
-                fontFamily: "var(--font-sans)",
-                fontSize: "0.65rem",
-                fontWeight: 500,
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: "#1B2D4F",
-                opacity: 0.7,
-                marginBottom: "2.5rem",
-              }}
-            >
-              PREÇOS DA EDIÇÃO 01 · VÁLIDO ATÉ 31 DE MARÇO DE 2027
-            </motion.p>
-
             <motion.div variants={fadeUp}>
               <Link
-                href="/contato"
+                href="/servicos"
                 style={{
                   fontFamily: "var(--font-sans)",
                   fontSize: "0.85rem",
                   fontWeight: 500,
-                  color: "#F5F1E8",
-                  background: "#1B2D4F",
+                  color: "#1B2D4F",
+                  background: "transparent",
+                  border: "2px solid #1B2D4F",
                   padding: "1.1rem 2.5rem",
                   display: "inline-block",
                   letterSpacing: "0.04em",
                   transition: "opacity 0.2s ease",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
                 onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
               >
-                Solicitar proposta →
+                Ver os serviços →
               </Link>
             </motion.div>
           </motion.div>
