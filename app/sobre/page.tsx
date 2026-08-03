@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Nav from "../components/Nav";
@@ -42,6 +43,7 @@ const secoes = [
 ];
 
 export default function SobrePage() {
+  useEffect(() => { document.title = "Sobre — Aphotex Design"; }, []);
   return (
     <>
       <Nav />

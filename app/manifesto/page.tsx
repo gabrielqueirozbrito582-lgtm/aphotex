@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import Nav from "../components/Nav";
@@ -60,6 +61,7 @@ const sections = [
 ];
 
 export default function ManifestoPage() {
+  useEffect(() => { document.title = "Manifesto — Aphotex Design"; }, []);
   return (
     <>
       <Nav />

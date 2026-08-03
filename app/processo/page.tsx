@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Nav from "../components/Nav";
@@ -45,6 +46,7 @@ const etapas = [
 ];
 
 export default function ProcessoPage() {
+  useEffect(() => { document.title = "Processo — Aphotex Design"; }, []);
   return (
     <>
       <Nav />

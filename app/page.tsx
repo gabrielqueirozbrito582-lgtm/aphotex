@@ -589,14 +589,12 @@ export default function Home() {
             >
               {[
                 {
-                  href: "https://rafaella-leah.vercel.app/",
                   img: "/portfolio/rafaella-leah-hero.jpg",
                   nicho: "PROJETO · SAÚDE & BEM-ESTAR",
                   nome: "Rafaella Leah",
                   desc: "Fisioterapia domiciliar e Pilates individual online. Site com identidade acolhedora, foco em conversão via WhatsApp e narrativa emocional.",
                 },
                 {
-                  href: "https://www.terapeutareginafernandes.com.br/",
                   img: "/portfolio/regina-fernandes-hero.jpg",
                   nicho: "PROJETO · SAÚDE MENTAL",
                   nome: "Regina Fernandes",
@@ -610,38 +608,27 @@ export default function Home() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.65, delay: i * 0.1 }}
                 >
-                  <a
-                    href={p.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ display: "block", textDecoration: "none" }}
+                  <div
+                    style={{
+                      aspectRatio: "16 / 10",
+                      overflow: "hidden",
+                      border: "1px solid #E5DFCF",
+                      marginBottom: "1.5rem",
+                    }}
                   >
-                    <div
+                    <img
+                      src={p.img}
+                      alt={`Screenshot do site de ${p.nome}`}
                       style={{
-                        aspectRatio: "16 / 10",
-                        overflow: "hidden",
-                        border: "1px solid #E5DFCF",
-                        marginBottom: "1.5rem",
-                        position: "relative",
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        objectPosition: "top",
+                        display: "block",
+                        filter: "saturate(0.9)",
                       }}
-                    >
-                      <img
-                        src={p.img}
-                        alt={`Screenshot do site de ${p.nome}`}
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                          objectPosition: "top",
-                          display: "block",
-                          filter: "saturate(0.9)",
-                          transition: "opacity 0.3s ease",
-                        }}
-                        onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.92")}
-                        onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-                      />
-                    </div>
-                  </a>
+                    />
+                  </div>
 
                   <p
                     style={{
@@ -675,27 +662,10 @@ export default function Home() {
                       fontSize: "0.95rem",
                       lineHeight: 1.65,
                       color: "#4A4A4A",
-                      marginBottom: "1rem",
                     }}
                   >
                     {p.desc}
                   </p>
-
-                  <a
-                    href={p.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-mustard"
-                    style={{
-                      fontFamily: "var(--font-sans)",
-                      fontSize: "0.82rem",
-                      fontWeight: 500,
-                      color: "#D4A73C",
-                      letterSpacing: "0.04em",
-                    }}
-                  >
-                    Visitar site →
-                  </a>
                 </motion.div>
               ))}
             </div>

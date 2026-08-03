@@ -18,11 +18,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Aphotex Design — Sites Premium para Profissionais Liberais",
+  title: "Aphotex Design — Estúdio Editorial de Design Digital",
   description:
     "Estúdio editorial de design premium. Criamos sites exclusivos para psicólogos, advogados, coaches, nutricionistas e consultores. Preços de lançamento — Edição 01.",
   openGraph: {
-    title: "Aphotex Design — Edição 01",
+    title: "Aphotex Design — Estúdio Editorial de Design Digital",
     description:
       "Sites e design visual para profissionais que vivem da própria expertise. Presença digital à altura da autoridade que você já tem.",
     type: "website",

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Nav from "../components/Nav";
@@ -154,6 +155,7 @@ const faq = [
 ];
 
 export default function ServicosPage() {
+  useEffect(() => { document.title = "Serviços — Aphotex Design"; }, []);
   return (
     <>
       <Nav />

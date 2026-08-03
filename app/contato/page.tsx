@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
@@ -33,6 +33,7 @@ const labelStyle = {
 };
 
 export default function ContatoPage() {
+  useEffect(() => { document.title = "Contato — Aphotex Design"; }, []);
   const [form, setForm] = useState({
     nome: "",
     email: "",
