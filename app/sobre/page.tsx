@@ -89,44 +89,105 @@ export default function SobrePage() {
         </section>
 
         {/* Fundador */}
-        <section style={{ padding: "0 2rem 4rem" }}>
+        <section style={{ padding: "0 2rem 5rem" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
               style={{
-                background: "#1B2D4F",
-                padding: "3rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "1rem",
-                maxWidth: 480,
+                display: "grid",
+                gridTemplateColumns: "300px 1fr",
+                gap: "3.5rem",
+                alignItems: "start",
               }}
+              className="fundador-grid"
             >
-              <div
-                style={{
-                  width: 80,
-                  height: 80,
-                  background: "rgba(245,241,232,0.08)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                <span style={{ fontFamily: "var(--font-serif)", fontSize: "2rem", color: "#F5F1E8", opacity: 0.4 }}>GR</span>
+              {/* Foto */}
+              <div>
+                <div
+                  style={{
+                    aspectRatio: "3 / 4",
+                    overflow: "hidden",
+                    border: "1px solid #E5DFCF",
+                  }}
+                >
+                  <img
+                    src="/images/gabriel-fundador.jpg"
+                    alt="Gabriel Queiroz Brito, fundador da Aphotex Design"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      objectPosition: "center top",
+                      display: "block",
+                      filter: "saturate(0.9) contrast(1.02)",
+                    }}
+                  />
+                </div>
+                <p
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    fontStyle: "italic",
+                    fontSize: "0.82rem",
+                    color: "#4A4A4A",
+                    marginTop: "0.75rem",
+                    opacity: 0.75,
+                  }}
+                >
+                  Gabriel Queiroz Brito — Fundador
+                </p>
               </div>
-              <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "1.3rem", color: "#F5F1E8" }}>
-                Gabriel Queiroz Brito
-              </p>
-              <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.65rem", fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: "#D4A73C" }}>
-                Fundador · Aphotex Design
-              </p>
-              <p style={{ fontFamily: "var(--font-sans)", fontSize: "0.85rem", lineHeight: 1.65, color: "rgba(245,241,232,0.6)", marginTop: "0.5rem" }}>
-                São Paulo, Brasil · 2026
-              </p>
+
+              {/* Texto */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", paddingTop: "0.5rem" }}>
+                <p
+                  style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "0.65rem",
+                    fontWeight: 500,
+                    letterSpacing: "0.18em",
+                    textTransform: "uppercase",
+                    color: "#D4A73C",
+                  }}
+                >
+                  FUNDADOR
+                </p>
+                <h2
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)",
+                    fontWeight: 400,
+                    color: "#1B2D4F",
+                    lineHeight: 1.15,
+                  }}
+                >
+                  Gabriel Queiroz Brito
+                </h2>
+                <div style={{ width: 40, height: 1, background: "#D4A73C" }} />
+                <p
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    fontStyle: "italic",
+                    fontSize: "clamp(1.1rem, 2vw, 1.35rem)",
+                    lineHeight: 1.55,
+                    color: "#1B2D4F",
+                  }}
+                >
+                  Designer e estrategista digital especializado em profissionais liberais. Fundou a Aphotex com a convicção de que autoridade real merece presença digital à sua altura.
+                </p>
+                <p
+                  style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "0.95rem",
+                    lineHeight: 1.75,
+                    color: "#4A4A4A",
+                  }}
+                >
+                  São Paulo, Brasil · Edição 01 · 2026
+                </p>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -206,6 +267,8 @@ export default function SobrePage() {
       <style>{`
         @media (max-width: 768px) {
           .sobre-row { grid-template-columns: 1fr !important; gap: 2rem !important; }
+          .fundador-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+          .fundador-grid > div:first-child { max-width: 260px; margin: 0 auto; }
         }
       `}</style>
     </>
