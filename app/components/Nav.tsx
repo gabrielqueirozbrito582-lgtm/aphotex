@@ -72,7 +72,7 @@ export default function Nav() {
               lineHeight: 1,
             }}
           >
-            APHOTEX
+            Aphotex Design
           </Link>
 
           {/* Desktop links */}
@@ -168,7 +168,7 @@ export default function Nav() {
             >
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "3rem" }}>
                 <span style={{ fontFamily: "var(--font-serif)", fontSize: "1.4rem", color: "#F5F1E8" }}>
-                  APHOTEX
+                  Aphotex Design
                 </span>
                 <button
                   onClick={() => setOpen(false)}
