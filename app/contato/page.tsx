@@ -6,7 +6,7 @@ import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 
 const WEBHOOK_URL =
-  "https://script.google.com/macros/s/AKfycby-pa7U9KZhEIu44yIfXl8olFPqxoPiVcqB0PYGCgP5U838cvzFGXMXxyXl1jGWp7k4/exec";
+  "https://script.google.com/macros/s/AKfycby740bCrehP5SLQ4NavPd0O21ywxwdRIGl5tejvjOEp-W-ojxSccD-hVu1WoM_XaY8yAw/exec";
 
 const inputStyle = {
   fontFamily: "var(--font-sans)",
